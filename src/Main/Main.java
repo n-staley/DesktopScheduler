@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     /**
-     * Mehtod to start the graphical application and load the login screen.
+     * Method to start the graphical application and load the login screen.
      * @param primaryStage stage used to run the program
      * @throws Exception can throw IOException if the file is not found or fails to load.
      */
