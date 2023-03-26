@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.AppointmentDashboardController">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AppointmentDashboardController">
    <children>
       <TableView fx:id="appointmentsTableView" layoutX="79.0" layoutY="100.0" prefHeight="400.0" prefWidth="1043.0">
         <columns>
@@ -31,32 +25,32 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointmentButton" layoutX="79.0" layoutY="524.0" mnemonicParsing="false" text="Add Appointment">
+      <Button fx:id="addAppointmentButton" layoutX="79.0" layoutY="524.0" mnemonicParsing="false" onAction="#toAddAppointment" text="Add Appointment">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="editAppointmentButton" layoutX="267.0" layoutY="524.0" mnemonicParsing="false" text="Edit Appointment">
+      <Button fx:id="editAppointmentButton" layoutX="267.0" layoutY="524.0" mnemonicParsing="false" onAction="#toEditAppointment" text="Edit Appointment">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="deleteAppointmentButton" layoutX="451.0" layoutY="526.0" mnemonicParsing="false" text="Delete Appointment">
+      <Button fx:id="deleteAppointmentButton" layoutX="451.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete Appointment">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="viewCustomersButton" layoutX="648.0" layoutY="524.0" mnemonicParsing="false" text="View Customers">
+      <Button fx:id="viewCustomersButton" layoutX="648.0" layoutY="524.0" mnemonicParsing="false" onAction="#toViewCustomers" text="View Customers">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="viewReportsButton" layoutX="824.0" layoutY="524.0" mnemonicParsing="false" text="View Reports">
+      <Button fx:id="viewReportsButton" layoutX="824.0" layoutY="524.0" mnemonicParsing="false" onAction="#toViewReports" text="View Reports">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="exitButton" layoutX="1075.0" layoutY="524.0" mnemonicParsing="false" text="Exit">
+      <Button fx:id="exitButton" layoutX="1075.0" layoutY="524.0" mnemonicParsing="false" onAction="#exit" text="Exit">
          <font>
             <Font size="16.0" />
          </font>

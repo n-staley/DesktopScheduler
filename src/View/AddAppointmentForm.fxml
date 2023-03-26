@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="850.0" prefWidth="550.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.AddAppointmentController">
+<AnchorPane fx:id="mainPane" prefHeight="850.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddAppointmentController">
    <children>
       <Label fx:id="appointmentLabel" layoutX="146.0" layoutY="61.0" text="Add Appointment">
          <font>
@@ -103,26 +97,18 @@
          </font>
       </TextField>
       <ComboBox fx:id="appointmentContactCombo" layoutX="226.0" layoutY="341.0" prefWidth="150.0" />
-      <ComboBox fx:id="appointmentStartMonthCombo" layoutX="226.0" layoutY="441.0" prefHeight="25.0" prefWidth="81.0" promptText="Month" />
-      <ComboBox fx:id="appointmentStartDayCombo" layoutX="326.0" layoutY="441.0" prefHeight="25.0" prefWidth="66.0" promptText="Day" />
-      <ComboBox fx:id="appointmentStartYearCombo" layoutX="413.0" layoutY="441.0" prefHeight="25.0" prefWidth="66.0" promptText="Year" />
-      <ComboBox fx:id="appointmentEndMonthCombo" layoutX="226.0" layoutY="541.0" prefHeight="25.0" prefWidth="81.0" promptText="Month" />
-      <ComboBox fx:id="appointmentEndDayCombo" layoutX="326.0" layoutY="541.0" prefHeight="25.0" prefWidth="66.0" promptText="Day" />
-      <ComboBox fx:id="appointmentEndYearCombo" layoutX="413.0" layoutY="541.0" prefHeight="25.0" prefWidth="66.0" promptText="Year" />
-      <TextField fx:id="appointmentStartTimeText" layoutX="224.0" layoutY="491.0" prefHeight="25.0" prefWidth="98.0" promptText="HH:MM" />
-      <RadioButton fx:id="startAMRadio" layoutX="339.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="AM">
+      <RadioButton fx:id="startAMRadio" layoutX="393.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="AM">
          <toggleGroup>
             <ToggleGroup fx:id="startToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="startPMRadio" layoutX="394.0" layoutY="495.0" mnemonicParsing="false" text="PM" toggleGroup="$startToggleGroup" />
-      <TextField fx:id="appointmentEndTimeText" layoutX="226.0" layoutY="591.0" prefHeight="25.0" prefWidth="98.0" promptText="HH:MM" />
-      <RadioButton fx:id="endAMRadio" layoutX="339.0" layoutY="595.0" mnemonicParsing="false" selected="true" text="AM">
+      <RadioButton fx:id="startPMRadio" layoutX="453.0" layoutY="495.0" mnemonicParsing="false" text="PM" toggleGroup="$startToggleGroup" />
+      <RadioButton fx:id="endAMRadio" layoutX="393.0" layoutY="595.0" mnemonicParsing="false" selected="true" text="AM">
          <toggleGroup>
             <ToggleGroup fx:id="endToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="endPMRadio" layoutX="394.0" layoutY="595.0" mnemonicParsing="false" text="PM" toggleGroup="$endToggleGroup" />
+      <RadioButton fx:id="endPMRadio" layoutX="453.0" layoutY="595.0" mnemonicParsing="false" text="PM" toggleGroup="$endToggleGroup" />
       <TextField fx:id="appointmentCustomerIDText" editable="false" layoutX="226.0" layoutY="641.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
@@ -133,15 +119,21 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="appointmentSaveButton" layoutX="417.0" layoutY="755.0" mnemonicParsing="false" text="Save">
+      <Button fx:id="appointmentSaveButton" layoutX="417.0" layoutY="755.0" mnemonicParsing="false" onAction="#saveAppointment" text="Save">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="appointmentCancelButton" layoutX="310.0" layoutY="755.0" mnemonicParsing="false" text="Cancel">
+      <Button fx:id="appointmentCancelButton" layoutX="310.0" layoutY="755.0" mnemonicParsing="false" onAction="#cancelAddAppointment" text="Cancel">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+      <ComboBox fx:id="startHourCombo" layoutX="226.0" layoutY="491.0" prefHeight="25.0" prefWidth="72.0" promptText="Hour" />
+      <ComboBox fx:id="startMinCombo" layoutX="310.0" layoutY="491.0" prefHeight="25.0" prefWidth="69.0" promptText="Min" />
+      <ComboBox fx:id="endHourCombo" layoutX="226.0" layoutY="591.0" prefHeight="25.0" prefWidth="72.0" promptText="Hour" />
+      <ComboBox fx:id="endMinCombo" layoutX="310.0" layoutY="591.0" prefHeight="25.0" prefWidth="69.0" promptText="Min" />
+      <DatePicker fx:id="startDate" layoutX="226.0" layoutY="441.0" />
+      <DatePicker fx:id="endDate" layoutX="226.0" layoutY="541.0" />
    </children>
 </AnchorPane>

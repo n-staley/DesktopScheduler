@@ -1,11 +1,15 @@
 package Controller;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
-public class EditCustomerController extends InputCheckController{
+import java.io.IOException;
+
+public class EditCustomerController extends ViewController {
 
     public Label customerLabel;
     public Label customerIDLabel;
@@ -24,4 +28,23 @@ public class EditCustomerController extends InputCheckController{
     public ComboBox customerCountryCombo;
     public Button saveButton;
     public Button cancelButton;
+    public AnchorPane mainPane;
+
+    public void cancelEditCustomer(ActionEvent actionEvent) {
+        try {
+            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void saveEditCustomer(ActionEvent actionEvent) {
+        try {
+            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -1,8 +1,12 @@
 package Controller;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
-public class AddAppointmentController {
+import java.io.IOException;
+
+public class AddAppointmentController extends ViewController {
     public Label appointmentLabel;
     public Label appointmentIDLabel;
     public TextField appointmentIDText;
@@ -22,17 +26,9 @@ public class AddAppointmentController {
     public TextField appointmentLocationText;
     public TextField appointmentTypeText;
     public ComboBox appointmentContactCombo;
-    public ComboBox appointmentStartMonthCombo;
-    public ComboBox appointmentStartDayCombo;
-    public ComboBox appointmentStartYearCombo;
-    public ComboBox appointmentEndMonthCombo;
-    public ComboBox appointmentEndDayCombo;
-    public ComboBox appointmentEndYearCombo;
-    public TextField appointmentStartTimeText;
     public RadioButton startAMRadio;
     public ToggleGroup startToggleGroup;
     public RadioButton startPMRadio;
-    public TextField appointmentEndTimeText;
     public RadioButton endAMRadio;
     public ToggleGroup endToggleGroup;
     public RadioButton endPMRadio;
@@ -40,4 +36,29 @@ public class AddAppointmentController {
     public TextField appointmentUserIDText;
     public Button appointmentSaveButton;
     public Button appointmentCancelButton;
+    public AnchorPane mainPane;
+    public ComboBox startHourCombo;
+    public ComboBox startMinCombo;
+    public ComboBox endHourCombo;
+    public ComboBox endMinCombo;
+    public DatePicker startDate;
+    public DatePicker endDate;
+
+    public void saveAppointment(ActionEvent actionEvent) {
+        try {
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cancelAddAppointment(ActionEvent actionEvent) {
+        try {
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

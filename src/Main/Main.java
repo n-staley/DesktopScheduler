@@ -4,7 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 
 /**
@@ -16,14 +20,24 @@ import javafx.stage.Stage;
 public class Main extends Application {
     /**
      * Method to start the graphical application and load the login screen.
+     * Used a lambda expression for the action event on setOncloseRequest to be able to consume the event and add a conformation for exiting the program.
      * @param primaryStage stage used to run the program
      * @throws Exception can throw IOException if the file is not found or fails to load.
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/View/LoginForm.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Login");
+        primaryStage.setOnCloseRequest(e -> {
+            e.consume();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will exit the program, do you wish to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                primaryStage.close();
+            }
+        });
+        primaryStage.setScene(new Scene(root, 440, 410));
         primaryStage.show();
     }
 
@@ -32,6 +46,10 @@ public class Main extends Application {
      * @param args arguments
      */
     public static void main(String[] args) {
+
+
         launch(args);
+
+
     }
 }
