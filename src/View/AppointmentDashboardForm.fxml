@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.AppointmentDashboardController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.AppointmentDashboardController">
+   <children>
+      <TableView fx:id="appointmentsTableView" layoutX="79.0" layoutY="100.0" prefHeight="400.0" prefWidth="1043.0">
+        <columns>
+          <TableColumn fx:id="appointmentIDColumn" prefWidth="97.0" text="Appointment ID" />
+          <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="224.0" text="Description" />
+            <TableColumn fx:id="locationColumn" prefWidth="90.0" text="Location" />
+            <TableColumn fx:id="contactColumn" prefWidth="102.0" text="Contact" />
+            <TableColumn fx:id="typeColumn" prefWidth="90.0" text="Type" />
+            <TableColumn fx:id="startDateTimeColumn" prefWidth="107.0" text="Start Date &amp; Time" />
+            <TableColumn fx:id="endDateTimeColumn" prefWidth="111.0" text="End Date &amp; Time" />
+            <TableColumn fx:id="customerIDColumn" prefWidth="76.0" text="Customer ID" />
+            <TableColumn fx:id="userIDColumn" prefWidth="70.0" text="User ID" />
+        </columns>
+      </TableView>
+      <Label fx:id="appointmentsLabel" layoutX="510.0" layoutY="31.0" text="Appointments">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="addAppointmentButton" layoutX="79.0" layoutY="524.0" mnemonicParsing="false" text="Add Appointment">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="editAppointmentButton" layoutX="267.0" layoutY="524.0" mnemonicParsing="false" text="Edit Appointment">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteAppointmentButton" layoutX="451.0" layoutY="526.0" mnemonicParsing="false" text="Delete Appointment">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewCustomersButton" layoutX="648.0" layoutY="524.0" mnemonicParsing="false" text="View Customers">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewReportsButton" layoutX="824.0" layoutY="524.0" mnemonicParsing="false" text="View Reports">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitButton" layoutX="1075.0" layoutY="524.0" mnemonicParsing="false" text="Exit">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <RadioButton fx:id="appointmentWeekViewRadio" layoutX="79.0" layoutY="40.0" mnemonicParsing="false" selected="true" text="View Week">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="appointmentViewToggle" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="appointmentMonthViewRadio" layoutX="229.0" layoutY="40.0" mnemonicParsing="false" text="View Month" toggleGroup="$appointmentViewToggle">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </RadioButton>
+   </children>
 </AnchorPane>

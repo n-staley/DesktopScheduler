@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.ReportController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.ReportController">
+   <children>
+      <Label layoutX="551.0" layoutY="31.0" text="Reports">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="reportHolder" layoutX="79.0" layoutY="100.0" prefHeight="400.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="reportOneTab" text="Customer Appointments By Type">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="reportOneTableView" prefHeight="375.0" prefWidth="1043.0">
+                          <columns>
+                            <TableColumn fx:id="reportOneAppointmentType" prefWidth="160.0" text="Type of Appointment" />
+                            <TableColumn fx:id="reportOneNumberOfAppointments" prefWidth="180.0" text="Number of Appointments" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="reportTwoTab" text="Contacts' Schedules">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="reportTwoTableView" prefHeight="378.0" prefWidth="1043.0">
+                          <columns>
+                            <TableColumn fx:id="r2Contact" prefWidth="89.0" text="Contact" />
+                            <TableColumn fx:id="r2AppointmentID" prefWidth="100.0" text="Appointment ID" />
+                              <TableColumn fx:id="r2Title" prefWidth="87.0" text="Title" />
+                              <TableColumn fx:id="r2Type" prefWidth="83.0" text="Type" />
+                              <TableColumn fx:id="r2Description" prefWidth="350.0" text="Description" />
+                              <TableColumn fx:id="r2StartDateTime" prefWidth="123.0" text="Start Date &amp; Time" />
+                              <TableColumn fx:id="r2EndDateTime" prefWidth="127.0" text="End Date &amp; Time" />
+                              <TableColumn fx:id="r2CustomerID" prefWidth="83.0" text="Customer ID" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="report3Tab" text="Report 3">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="r3TableView" prefHeight="380.0" prefWidth="1043.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="exitButton" layoutX="1075.0" layoutY="525.0" mnemonicParsing="false" text="Exit">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewCustomersButton" layoutX="79.0" layoutY="525.0" mnemonicParsing="false" text="View Customers">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewAppointmentsButton" layoutX="249.0" layoutY="525.0" mnemonicParsing="false" text="View Appointments">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
