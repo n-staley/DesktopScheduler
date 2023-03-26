@@ -1,14 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.EditAppointmentController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="850.0" prefWidth="550.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.EditAppointmentController">
+   <children>
+      <Label fx:id="appointmentLabel" layoutX="146.0" layoutY="61.0" text="Edit Appointment">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentIDLabel" layoutX="71.0" layoutY="141.0" text="Appointment ID">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="appointmentIDText" editable="false" layoutX="224.0" layoutY="141.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label fx:id="appointmentTitleLabel" layoutX="71.0" layoutY="191.0" text="Title">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentDescriptionLabel" layoutX="71.0" layoutY="241.0" text="Description">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentLocationLabel" layoutX="71.0" layoutY="291.0" text="Location">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentContactLabel" layoutX="71.0" layoutY="341.0" text="Contact">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentTypeLabel" layoutX="71.0" layoutY="391.0" text="Type">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentStartDateLabel" layoutX="71.0" layoutY="441.0" text="Start Date">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentStartTimeLabel" layoutX="71.0" layoutY="491.0" text="Start Time">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentEndDateLabel" layoutX="71.0" layoutY="541.0" text="End Date">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentEndTimeLabel" layoutX="71.0" layoutY="591.0" text="End Time">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentCustomerIDLabel" layoutX="71.0" layoutY="641.0" text="Customer ID">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="appointmentUserIDLabel" layoutX="71.0" layoutY="691.0" text="User ID">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="appointmentTitleText" editable="false" layoutX="226.0" layoutY="191.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="appointmentDescriptionText" editable="false" layoutX="226.0" layoutY="241.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="appointmentLocationText" editable="false" layoutX="226.0" layoutY="291.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="appointmentTypeText" editable="false" layoutX="226.0" layoutY="391.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="appointmentContactCombo" layoutX="226.0" layoutY="341.0" prefWidth="150.0" />
+      <ComboBox fx:id="appointmentStartMonthCombo" layoutX="226.0" layoutY="441.0" prefHeight="25.0" prefWidth="81.0" promptText="Month" />
+      <ComboBox fx:id="appointmentStartDayCombo" layoutX="326.0" layoutY="441.0" prefHeight="25.0" prefWidth="66.0" promptText="Day" />
+      <ComboBox fx:id="appointmentStartYearCombo" layoutX="413.0" layoutY="441.0" prefHeight="25.0" prefWidth="66.0" promptText="Year" />
+      <ComboBox fx:id="appointmentEndMonthCombo" layoutX="226.0" layoutY="541.0" prefHeight="25.0" prefWidth="81.0" promptText="Month" />
+      <ComboBox fx:id="appointmentEndDayCombo" layoutX="326.0" layoutY="541.0" prefHeight="25.0" prefWidth="66.0" promptText="Day" />
+      <ComboBox fx:id="appointmentEndYearCombo" layoutX="413.0" layoutY="541.0" prefHeight="25.0" prefWidth="66.0" promptText="Year" />
+      <TextField fx:id="appointmentStartTimeText" layoutX="224.0" layoutY="491.0" prefHeight="25.0" prefWidth="98.0" promptText="HH:MM" />
+      <RadioButton fx:id="startAMRadio" layoutX="339.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="AM">
+         <toggleGroup>
+            <ToggleGroup fx:id="startToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="startPMRadio" layoutX="394.0" layoutY="495.0" mnemonicParsing="false" text="PM">
+         <toggleGroup>
+            <ToggleGroup fx:id="startToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <TextField fx:id="appointmentEndTimeText" layoutX="226.0" layoutY="591.0" prefHeight="25.0" prefWidth="98.0" promptText="HH:MM" />
+      <RadioButton fx:id="endAMRadio" layoutX="339.0" layoutY="595.0" mnemonicParsing="false" selected="true" text="AM">
+         <toggleGroup>
+            <ToggleGroup fx:id="endToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="endPMRadio" layoutX="394.0" layoutY="595.0" mnemonicParsing="false" text="PM">
+         <toggleGroup>
+            <ToggleGroup fx:id="endToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <TextField fx:id="appointmentCustomerIDText" editable="false" layoutX="226.0" layoutY="641.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="appointmentUserIDText" editable="false" layoutX="226.0" layoutY="691.0" prefHeight="25.0" prefWidth="220.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="appointmentSaveButton" layoutX="417.0" layoutY="755.0" mnemonicParsing="false" text="Save">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="appointmentCancelButton" layoutX="310.0" layoutY="755.0" mnemonicParsing="false" text="Cancel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
