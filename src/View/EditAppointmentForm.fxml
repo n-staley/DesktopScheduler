@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="850.0" prefWidth="550.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.EditAppointmentController">
+<AnchorPane prefHeight="850.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditAppointmentController">
    <children>
       <Label fx:id="appointmentLabel" layoutX="146.0" layoutY="61.0" text="Edit Appointment">
          <font>
@@ -115,22 +109,14 @@
             <ToggleGroup fx:id="startToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="startPMRadio" layoutX="394.0" layoutY="495.0" mnemonicParsing="false" text="PM">
-         <toggleGroup>
-            <ToggleGroup fx:id="startToggleGroup" />
-         </toggleGroup>
-      </RadioButton>
+      <RadioButton fx:id="startPMRadio" layoutX="394.0" layoutY="495.0" mnemonicParsing="false" text="PM" toggleGroup="$startToggleGroup" />
       <TextField fx:id="appointmentEndTimeText" layoutX="226.0" layoutY="591.0" prefHeight="25.0" prefWidth="98.0" promptText="HH:MM" />
       <RadioButton fx:id="endAMRadio" layoutX="339.0" layoutY="595.0" mnemonicParsing="false" selected="true" text="AM">
          <toggleGroup>
             <ToggleGroup fx:id="endToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="endPMRadio" layoutX="394.0" layoutY="595.0" mnemonicParsing="false" text="PM">
-         <toggleGroup>
-            <ToggleGroup fx:id="endToggleGroup" />
-         </toggleGroup>
-      </RadioButton>
+      <RadioButton fx:id="endPMRadio" layoutX="394.0" layoutY="595.0" mnemonicParsing="false" text="PM" toggleGroup="$endToggleGroup" />
       <TextField fx:id="appointmentCustomerIDText" editable="false" layoutX="226.0" layoutY="641.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
