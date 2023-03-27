@@ -5,8 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.text.Utilities;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -24,9 +28,46 @@ public class LoginController extends ViewController implements Initializable {
     public AnchorPane mainPane;
 
     public void login (ActionEvent actionEvent) {
-        if (true) {
-            Locale errorLocale = Locale.getDefault();
-            ResourceBundle errorRB = ResourceBundle.getBundle("LoginLanguage", errorLocale);
+        Locale errorLocale = Locale.getDefault();
+        ResourceBundle errorRB = ResourceBundle.getBundle("LoginLanguage", errorLocale);
+        ZonedDateTime loginDateTime = ZonedDateTime.now();
+        Boolean loginSuccess = false;
+        String username;
+        String password;
+        boolean errorCheck = false;
+        String errorMessage = "";
+
+
+        if (usernameTextBox.getText().isEmpty()) {
+            errorCheck = true;
+            errorMessage = errorMessage.concat(errorRB.getString("missingUserName"));
+        }
+        if (passwordTextBox.getText().isEmpty()) {
+            errorCheck = true;
+            errorMessage = errorMessage.concat(errorRB.getString("missingPassword"));
+        }
+        if (errorCheck) {
+            username = usernameTextBox.getText();
+            password = passwordTextBox.getText();
+            Utility.LoginLogger.log(username, password, loginDateTime, loginSuccess);
+
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(errorRB.getString("errorTitle"));
+            alert.setHeaderText(errorRB.getString("errorHeader"));
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+            return;
+
+        }
+
+
+        username = usernameTextBox.getText();
+        password = passwordTextBox.getText();
+
+
+        if (DAO.UserDao.loginQuery(username, password) == 0) {
+            Utility.LoginLogger.log(username, password, loginDateTime, loginSuccess);
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(errorRB.getString("errorTitle"));
             alert.setHeaderText(errorRB.getString("errorHeader"));
@@ -34,6 +75,8 @@ public class LoginController extends ViewController implements Initializable {
             alert.showAndWait();
 
         } else {
+            Boolean successfulLogin = true;
+            Utility.LoginLogger.log(username, password, loginDateTime, successfulLogin);
             try {
                 switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
             } catch (IOException e) {

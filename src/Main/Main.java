@@ -52,10 +52,11 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
-        DAO.DatabaseConnection.closeConnection();
 
 
         launch(args);
+
+        DAO.DatabaseConnection.closeConnection();
 
 
     }
