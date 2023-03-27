@@ -20,7 +20,7 @@
          <font>
             <Font size="29.0" />
          </font></Label>
-      <Label fx:id="zoneInformation" layoutX="52.0" layoutY="320.0" prefHeight="25.0" prefWidth="67.0" text="zoneID">
+      <Label fx:id="zoneInformation" layoutX="28.0" layoutY="320.0" prefHeight="25.0" prefWidth="159.0" text="zoneID">
          <font>
             <Font size="16.0" />
          </font></Label>

@@ -8,7 +8,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 
 /**
@@ -26,8 +28,11 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Locale userLocale = Locale.getDefault();
+        ResourceBundle rb = ResourceBundle.getBundle("LoginLanguage", userLocale);
+
         Parent root = FXMLLoader.load(getClass().getResource("/View/LoginForm.fxml"));
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle(rb.getString("login"));
         primaryStage.setOnCloseRequest(e -> {
             e.consume();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will exit the program, do you wish to continue?");
@@ -48,6 +53,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
         DAO.DatabaseConnection.closeConnection();
+
 
         launch(args);
 
