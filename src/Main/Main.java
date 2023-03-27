@@ -46,7 +46,8 @@ public class Main extends Application {
      * @param args arguments
      */
     public static void main(String[] args) {
-
+        DAO.DatabaseConnection.openConnection();
+        DAO.DatabaseConnection.closeConnection();
 
         launch(args);
 
