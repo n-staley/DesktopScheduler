@@ -1,4 +1,4 @@
-package Utilities;
+package Utility;
 
 public class DateTimeAdjustment {
 }
