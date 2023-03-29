@@ -5,11 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import javax.swing.text.Utilities;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -45,6 +42,42 @@ public class LoginController extends ViewController implements Initializable {
         if (passwordTextBox.getText().isEmpty()) {
             errorCheck = true;
             errorMessage = errorMessage.concat(errorRB.getString("missingPassword"));
+        }
+        username = usernameTextBox.getText();
+        password = passwordTextBox.getText();
+        for (int i = 0; i < username.length(); i++){
+            if (username.charAt(i) == '\'') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("usernameInvalidChar"));
+                break;
+            }
+            if (username.charAt(i) == '\"') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("usernameInvalidChar"));
+                break;
+            }
+            if (username.charAt(i) == '*') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("usernameInvalidChar"));
+                break;
+            }
+        }
+        for (int i = 0; i < password.length(); i++){
+            if (password.charAt(i) == '\'') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("passwordInvalidChar"));
+                break;
+            }
+            if (password.charAt(i) == '\"') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("passwordInvalidChar"));
+                break;
+            }
+            if (password.charAt(i) == '*') {
+                errorCheck = true;
+                errorMessage = errorMessage.concat(errorRB.getString("passwordInvalidChar"));
+                break;
+            }
         }
         if (errorCheck) {
             username = usernameTextBox.getText();

@@ -109,16 +109,6 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="endPMRadio" layoutX="453.0" layoutY="595.0" mnemonicParsing="false" text="PM" toggleGroup="$endToggleGroup" />
-      <TextField fx:id="appointmentCustomerIDText" editable="false" layoutX="226.0" layoutY="641.0" prefHeight="25.0" prefWidth="220.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="appointmentUserIDText" editable="false" layoutX="226.0" layoutY="691.0" prefHeight="25.0" prefWidth="220.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
       <Button fx:id="appointmentSaveButton" layoutX="417.0" layoutY="755.0" mnemonicParsing="false" onAction="#saveAppointment" text="Save">
          <font>
             <Font size="16.0" />
@@ -135,5 +125,7 @@
       <ComboBox fx:id="endMinCombo" layoutX="310.0" layoutY="591.0" prefHeight="25.0" prefWidth="69.0" promptText="Min" />
       <DatePicker fx:id="startDate" layoutX="226.0" layoutY="441.0" />
       <DatePicker fx:id="endDate" layoutX="226.0" layoutY="541.0" />
+      <ComboBox fx:id="userIDCombo" layoutX="226.0" layoutY="691.0" prefWidth="150.0" />
+      <ComboBox fx:id="customerIDCombo" layoutX="226.0" layoutY="641.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

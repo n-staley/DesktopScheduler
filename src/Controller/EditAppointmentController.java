@@ -30,8 +30,6 @@ public class EditAppointmentController extends ViewController {
     public RadioButton startPMRadio;
     public RadioButton endAMRadio;
     public RadioButton endPMRadio;
-    public TextField appointmentCustomerIDText;
-    public TextField appointmentUserIDText;
     public Button appointmentSaveButton;
     public Button appointmentCancelButton;
     public ToggleGroup startToggleGroup;
@@ -43,6 +41,8 @@ public class EditAppointmentController extends ViewController {
     public ComboBox endMinCombo;
     public DatePicker startDate;
     public DatePicker endDate;
+    public ComboBox customerIDCombo;
+    public ComboBox userIDCombo;
 
     public void saveAppointment(ActionEvent actionEvent) {
         try {
