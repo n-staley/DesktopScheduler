@@ -1,5 +1,6 @@
 package Main;
 
+import DAO.UserDao;
 import Utility.InputErrorCheck;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +54,10 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
-
+        UserDao.createUserList();
+        for(Model.User user : UserDao.usersList) {
+            System.out.println(user);
+        }
 
 
         launch(args);

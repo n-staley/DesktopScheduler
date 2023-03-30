@@ -5,6 +5,10 @@ public class User {
     private int userID;
     private String userName;
 
+    public User() {
+        userID = -1;
+        userName = "";
+    }
     public User(int userID, String userName) {
         this.userID = userID;
         this.userName = userName;
@@ -24,5 +28,9 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String toString() {
+        return this.userName + " " + this.userID;
     }
 }
