@@ -34,3 +34,4 @@ public class InputErrorCheck {
         errorMessage = errorMessage.concat(errorString);
     }
 }
+
