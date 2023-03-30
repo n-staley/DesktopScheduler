@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginController extends ViewController implements Initializable {
@@ -28,7 +30,7 @@ public class LoginController extends ViewController implements Initializable {
         Locale errorLocale = Locale.getDefault();
         ResourceBundle errorRB = ResourceBundle.getBundle("LoginLanguage", errorLocale);
         ZonedDateTime loginDateTime = ZonedDateTime.now();
-        Boolean loginSuccess = false;
+        boolean loginSuccess = false;
         String username;
         String password;
         boolean errorCheck = false;
@@ -108,7 +110,7 @@ public class LoginController extends ViewController implements Initializable {
             alert.showAndWait();
 
         } else {
-            Boolean successfulLogin = true;
+            boolean successfulLogin = true;
             Utility.LoginLogger.log(username, password, loginDateTime, successfulLogin);
             try {
                 switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
@@ -119,7 +121,18 @@ public class LoginController extends ViewController implements Initializable {
     }
 
     public void exit(ActionEvent actionEvent) {
-        exitProgram(mainPane);
+        Locale userLocale = Locale.getDefault();
+        ResourceBundle rb = ResourceBundle.getBundle("LoginLanguage", userLocale);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, rb.getString("exitConfirmation"));
+        alert.setTitle(rb.getString("confirmation"));
+        alert.setHeaderText(rb.getString("confirmation"));
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+        }
+
         }
 
     @Override
