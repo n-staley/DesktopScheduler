@@ -12,8 +12,8 @@
             <TableColumn fx:id="nameColumn" prefWidth="120.0" text="Name" />
             <TableColumn fx:id="phoneNumberColumn" prefWidth="139.0" text="Phone Number" />
             <TableColumn fx:id="addressColumn" prefWidth="244.0" text="Address" />
-            <TableColumn fx:id="postalCodeColumn" minWidth="0.0" prefWidth="121.0" text="Postal Code" />
             <TableColumn fx:id="stateOrProvinceColumn" prefWidth="139.0" text="State/Province" />
+            <TableColumn fx:id="postalCodeColumn" minWidth="0.0" prefWidth="121.0" text="Postal Code" />
             <TableColumn fx:id="countryColumn" prefWidth="176.0" text="Country" />
          </columns>
       </TableView>

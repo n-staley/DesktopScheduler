@@ -54,12 +54,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
-        UserDao.createUserList();
-        for(Model.User user : UserDao.usersList) {
-            System.out.println(user);
-        }
-        ZonedDateTime currentTime = ZonedDateTime.now();
-        DAO.AppointmentDao.populateAppointmentLists(currentTime);
 
 
         launch(args);

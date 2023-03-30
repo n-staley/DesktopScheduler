@@ -112,6 +112,9 @@ public class LoginController extends ViewController implements Initializable {
         } else {
             boolean successfulLogin = true;
             Utility.LoginLogger.log(username, password, loginDateTime, successfulLogin);
+            ZonedDateTime currentTime = ZonedDateTime.now();
+            DAO.AppointmentDao.populateAppointmentLists(currentTime);
+            DAO.CustomersDao.populateCustomersList();
             try {
                 switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
             } catch (IOException e) {

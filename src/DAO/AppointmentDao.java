@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Appointment;
+import Utility.DateTimeAddressAdjustment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,13 +32,13 @@ public class AppointmentDao {
                     newAppointment.setDescription(rs.getString("Description"));
                     newAppointment.setLocation(rs.getString("Location"));
                     newAppointment.setType(rs.getString("Type"));
-                    newAppointment.setStart(Utility.DateTimeAdjustment.changeToCurrentTimezone(rs.getTimestamp("Start").toInstant()));
-                    newAppointment.setEnd(Utility.DateTimeAdjustment.changeToCurrentTimezone(rs.getTimestamp("End").toInstant()));
+                    newAppointment.setStart(DateTimeAddressAdjustment.changeToCurrentTimezone(rs.getTimestamp("Start").toInstant()));
+                    newAppointment.setEnd(DateTimeAddressAdjustment.changeToCurrentTimezone(rs.getTimestamp("End").toInstant()));
                     newAppointment.setCustID(rs.getInt("Customer_ID"));
                     newAppointment.setUsersID(rs.getInt("User_ID"));
                     newAppointment.setContactsID(rs.getInt("Contact_ID"));
-                    newAppointment.setFormattedStart(Utility.DateTimeAdjustment.formatTime(newAppointment.getStart()));
-                    newAppointment.setFormattedEnd(Utility.DateTimeAdjustment.formatTime(newAppointment.getEnd()));
+                    newAppointment.setFormattedStart(DateTimeAddressAdjustment.formatTime(newAppointment.getStart()));
+                    newAppointment.setFormattedEnd(DateTimeAddressAdjustment.formatTime(newAppointment.getEnd()));
                     allAppointments.add(newAppointment);
             }
 

@@ -4,13 +4,16 @@ public class Customers {
 
     private int customerID;
     private String customerName;
-    private String Address;
+    private String address;
     private String postalCode;
     private String phoneNumber;
     private int divisionID;
     private String divisionName;
     private int countryID;
     private String countryName;
+
+    public Customers() {
+    }
 
     /**
      *
@@ -27,7 +30,7 @@ public class Customers {
     public Customers(int customerID, String customerName, String address, String postalCode, String phoneNumber, int divisionID, String divisionName, int countryID, String countryName) {
         this.customerID = customerID;
         this.customerName = customerName;
-        Address = address;
+        this.address = address;
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
         this.divisionID = divisionID;
@@ -53,11 +56,11 @@ public class Customers {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getPostalCode() {

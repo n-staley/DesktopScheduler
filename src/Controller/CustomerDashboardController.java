@@ -2,15 +2,19 @@ package Controller;
 
 import Model.Customers;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CustomerDashboardController extends ViewController {
+public class CustomerDashboardController extends ViewController implements Initializable {
     public TableView<Customers> customersTableView;
     public TableColumn<Customers, Integer> customerIDColumn;
     public TableColumn<Customers, String> nameColumn;
@@ -69,5 +73,17 @@ public class CustomerDashboardController extends ViewController {
     }
 
     public void deleteCustomer(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        customersTableView.setItems(DAO.CustomersDao.getCustomersList());
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        stateOrProvinceColumn.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
     }
 }
