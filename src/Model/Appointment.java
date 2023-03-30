@@ -1,11 +1,10 @@
 package Model;
+
+import java.time.ZonedDateTime;
 /**
  * This class is for creating appointments.
  * @author Nicholas Staley
  */
-
-import java.time.ZonedDateTime;
-
 public class Appointment {
     /**
      * Holds the appointmentID.
@@ -47,7 +46,12 @@ public class Appointment {
      * Holds the ID of the contact for the appointment.
      */
     private int contactsID;
+    private String formattedStart;
+    private String formattedEnd;
 
+
+    public Appointment() {
+    }
 
     /**
      * The constructor that initializes appointments.
@@ -62,7 +66,7 @@ public class Appointment {
      * @param usersID ID for the user the appointment is with
      * @param contactsID ID for the contact of the appointment
      */
-    public Appointment(int appointmentID, String title, String description, String location, String type, ZonedDateTime start, ZonedDateTime end, int custID, int usersID, int contactsID) {
+    public Appointment(int appointmentID, String title, String description, String location, String type, ZonedDateTime start, ZonedDateTime end, int custID, int usersID, int contactsID, String formattedStart, String formattedEnd) {
         this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
@@ -73,6 +77,8 @@ public class Appointment {
         this.custID = custID;
         this.usersID = usersID;
         this.contactsID = contactsID;
+        this.formattedStart = formattedStart;
+        this.formattedEnd = formattedEnd;
     }
 
     /**
@@ -169,5 +175,21 @@ public class Appointment {
 
     public void setContactsID(int contactsID) {
         this.contactsID = contactsID;
+    }
+
+    public String getFormattedStart() {
+        return formattedStart;
+    }
+
+    public void setFormattedStart(String formattedStart) {
+        this.formattedStart = formattedStart;
+    }
+
+    public String getFormattedEnd() {
+        return formattedEnd;
+    }
+
+    public void setFormattedEnd(String formattedEnd) {
+        this.formattedEnd = formattedEnd;
     }
 }

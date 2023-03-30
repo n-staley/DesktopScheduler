@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -57,6 +58,8 @@ public class Main extends Application {
         for(Model.User user : UserDao.usersList) {
             System.out.println(user);
         }
+        ZonedDateTime currentTime = ZonedDateTime.now();
+        DAO.AppointmentDao.populateAppointmentLists(currentTime);
 
 
         launch(args);

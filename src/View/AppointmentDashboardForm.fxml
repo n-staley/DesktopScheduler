@@ -11,13 +11,13 @@
           <TableColumn fx:id="appointmentIDColumn" prefWidth="97.0" text="Appointment ID" />
           <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
             <TableColumn fx:id="descriptionColumn" prefWidth="224.0" text="Description" />
-            <TableColumn fx:id="locationColumn" prefWidth="90.0" text="Location" />
-            <TableColumn fx:id="contactColumn" prefWidth="102.0" text="Contact" />
-            <TableColumn fx:id="typeColumn" prefWidth="90.0" text="Type" />
-            <TableColumn fx:id="startDateTimeColumn" prefWidth="107.0" text="Start Date &amp; Time" />
-            <TableColumn fx:id="endDateTimeColumn" prefWidth="111.0" text="End Date &amp; Time" />
-            <TableColumn fx:id="customerIDColumn" prefWidth="76.0" text="Customer ID" />
-            <TableColumn fx:id="userIDColumn" prefWidth="70.0" text="User ID" />
+            <TableColumn fx:id="locationColumn" prefWidth="112.0" text="Location" />
+            <TableColumn fx:id="typeColumn" prefWidth="84.0" text="Type" />
+            <TableColumn fx:id="startDateTimeColumn" prefWidth="122.0" text="Start Date &amp; Time" />
+            <TableColumn fx:id="endDateTimeColumn" prefWidth="118.0" text="End Date &amp; Time" />
+            <TableColumn fx:id="customerIDColumn" text="Customer ID" />
+            <TableColumn fx:id="userIDColumn" prefWidth="63.0" text="User ID" />
+            <TableColumn fx:id="contactColumn" prefWidth="67.0" text="Contact" />
         </columns>
       </TableView>
       <Label fx:id="appointmentsLabel" layoutX="510.0" layoutY="31.0" text="Appointments">
@@ -55,7 +55,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <RadioButton fx:id="appointmentWeekViewRadio" layoutX="79.0" layoutY="40.0" mnemonicParsing="false" selected="true" text="View Week">
+      <RadioButton fx:id="appointmentWeekViewRadio" layoutX="79.0" layoutY="40.0" mnemonicParsing="false" onAction="#viewWeekSelected" selected="true" text="View Week">
          <font>
             <Font size="16.0" />
          </font>
@@ -63,7 +63,7 @@
             <ToggleGroup fx:id="appointmentViewToggle" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="appointmentMonthViewRadio" layoutX="229.0" layoutY="40.0" mnemonicParsing="false" text="View Month" toggleGroup="$appointmentViewToggle">
+      <RadioButton fx:id="appointmentMonthViewRadio" layoutX="229.0" layoutY="40.0" mnemonicParsing="false" onAction="#viewMonthSelected" text="View Month" toggleGroup="$appointmentViewToggle">
          <font>
             <Font size="16.0" />
          </font>
