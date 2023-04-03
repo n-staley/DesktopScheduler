@@ -16,7 +16,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="appointmentIDText" editable="false" layoutX="224.0" layoutY="141.0" prefHeight="25.0" prefWidth="220.0">
+      <TextField fx:id="appointmentIDText" editable="false" layoutX="224.0" layoutY="141.0" prefHeight="25.0" prefWidth="220.0" text="Auto Generated">
          <font>
             <Font size="16.0" />
          </font>
@@ -76,22 +76,22 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="appointmentTitleText" editable="false" layoutX="226.0" layoutY="191.0" prefHeight="25.0" prefWidth="220.0">
+      <TextField fx:id="appointmentTitleText" layoutX="226.0" layoutY="191.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="appointmentDescriptionText" editable="false" layoutX="226.0" layoutY="241.0" prefHeight="25.0" prefWidth="220.0">
+      <TextField fx:id="appointmentDescriptionText" layoutX="226.0" layoutY="241.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="appointmentLocationText" editable="false" layoutX="226.0" layoutY="291.0" prefHeight="25.0" prefWidth="220.0">
+      <TextField fx:id="appointmentLocationText" layoutX="226.0" layoutY="291.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="appointmentTypeText" editable="false" layoutX="226.0" layoutY="391.0" prefHeight="25.0" prefWidth="220.0">
+      <TextField fx:id="appointmentTypeText" layoutX="226.0" layoutY="391.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -123,8 +123,8 @@
       <ComboBox fx:id="startMinCombo" layoutX="314.0" layoutY="491.0" prefHeight="25.0" prefWidth="65.0" promptText="Min" />
       <ComboBox fx:id="endHourCombo" layoutX="226.0" layoutY="591.0" prefHeight="25.0" prefWidth="69.0" promptText="Hour" />
       <ComboBox fx:id="endMinCombo" layoutX="314.0" layoutY="591.0" prefHeight="25.0" prefWidth="65.0" promptText="Min" />
-      <DatePicker fx:id="startDate" layoutX="226.0" layoutY="441.0" />
-      <DatePicker fx:id="endDate" layoutX="226.0" layoutY="541.0" />
+      <DatePicker fx:id="startDateInput" layoutX="226.0" layoutY="441.0" />
+      <DatePicker fx:id="endDateInput" layoutX="226.0" layoutY="541.0" />
       <ComboBox fx:id="customerIDCombo" layoutX="226.0" layoutY="641.0" prefWidth="150.0" />
       <ComboBox fx:id="userIDCombo" layoutX="226.0" layoutY="691.0" prefWidth="150.0" />
    </children>

@@ -40,6 +40,7 @@ public class AppointmentDashboardController extends ViewController implements In
     public ToggleGroup appointmentViewToggle;
     public RadioButton appointmentMonthViewRadio;
     public AnchorPane mainPane;
+    public RadioButton viewAllRadio;
 
     public void toAddAppointment(ActionEvent actionEvent) {
         try {
@@ -115,6 +116,20 @@ public class AppointmentDashboardController extends ViewController implements In
 
     public void viewMonthSelected(ActionEvent actionEvent) {
         appointmentsTableView.setItems(DAO.AppointmentDao.getMonthAppointments());
+        appointmentIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+        endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("custID"));
+        userIDColumn.setCellValueFactory(new PropertyValueFactory<>("usersID"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
+    }
+
+    public void viewAllSelected(ActionEvent actionEvent) {
+        appointmentsTableView.setItems(DAO.AppointmentDao.getAllAppointments());
         appointmentIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

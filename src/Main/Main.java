@@ -1,6 +1,7 @@
 package Main;
 
 import DAO.UserDao;
+import Model.Contacts;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.Optional;
@@ -54,7 +56,11 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
+        /*Instant now = Instant.now().plusSeconds(100);
 
+        int wasAdded = DAO.AppointmentDao.addNewAppointment("", "description","", "type", now, now, now, "me", now, "me", 1, 1, 1);
+        System.out.println(wasAdded);*/
+        //Locale.setDefault(new Locale("fr"));
 
         launch(args);
 

@@ -38,10 +38,7 @@ public abstract class ViewController {
 
     public InputErrorCheck stringErrorCheck(int maxLength, TextField textFieldCheck, String inputField) {
         InputErrorCheck inputErrorCheck = new InputErrorCheck();
-        if (textFieldCheck.getText().isEmpty()) {
-            inputErrorCheck.setWasError(true);
-            inputErrorCheck.concatErrorMessage("Must enter a " + inputField + ".\n");
-        }
+
         String userInput = textFieldCheck.getText();
         if (userInput.length() > maxLength) {
             inputErrorCheck.setWasError(true);
@@ -50,17 +47,17 @@ public abstract class ViewController {
         for (int i = 0; i < userInput.length(); i++){
             if (userInput.charAt(i) == '\'') {
                 inputErrorCheck.setWasError(true);
-                inputErrorCheck.concatErrorMessage(inputField + "Input can not include ', \", or *.\n");
+                inputErrorCheck.concatErrorMessage(inputField + " input can not include ', \", or *.\n");
                 break;
             }
             if (userInput.charAt(i) == '\"') {
                 inputErrorCheck.setWasError(true);
-                inputErrorCheck.concatErrorMessage(inputField + "Input can not include ', \", or *.\n");
+                inputErrorCheck.concatErrorMessage(inputField + " input can not include ', \", or *.\n");
                 break;
             }
             if (userInput.charAt(i) == '*') {
                 inputErrorCheck.setWasError(true);
-                inputErrorCheck.concatErrorMessage(inputField + "Input can not include ', \", or *.\n");
+                inputErrorCheck.concatErrorMessage(inputField + " input can not include ', \", or *.\n");
                 break;
             }
         }

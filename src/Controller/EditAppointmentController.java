@@ -39,8 +39,8 @@ public class EditAppointmentController extends ViewController {
     public ComboBox startMinCombo;
     public ComboBox endHourCombo;
     public ComboBox endMinCombo;
-    public DatePicker startDate;
-    public DatePicker endDate;
+    public DatePicker startDateInput;
+    public DatePicker endDateInput;
     public ComboBox customerIDCombo;
     public ComboBox userIDCombo;
 
