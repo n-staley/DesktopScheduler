@@ -80,3 +80,11 @@ Username: test, password: test, Date/Time: 2023-04-03T23:57:06.229786200-04:00[A
 Username: test, password: test, Date/Time: 2023-04-03T23:59:59.313858200-04:00[America/New_York], Successful login: true
 Username: test, password: test, Date/Time: 2023-04-04T00:00:55.318159200-04:00[America/New_York], Successful login: true
 Username: test, password: test, Date/Time: 2023-04-03T22:20:57.314881600-06:00[America/Denver], Successful login: true
+Username: test, password: tewst, Date/Time: 2023-04-04T01:27:53.703607900-04:00[America/New_York], Successful login: false
+Username: test, password: test, Date/Time: 2023-04-04T01:27:57.703163500-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T01:28:36.524394800-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T01:30:27.567659200-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T01:53:54.142839700-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T01:55:01.607718400-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T04:28:35.169728300-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-04T04:30:25.336072700-04:00[America/New_York], Successful login: true

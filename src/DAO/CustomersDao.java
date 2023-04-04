@@ -1,19 +1,25 @@
 package DAO;
 
+import Model.Countries;
 import Model.Customers;
+import Model.FirstLevelDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Optional;
 
 public class CustomersDao {
 
     private static ObservableList<Customers> customersList = FXCollections.observableArrayList();
     private static ObservableList<String> customerNameList = FXCollections.observableArrayList();
-    private static ObservableList<String> countryList = FXCollections.observableArrayList();
+    private static ObservableList<FirstLevelDivisions> divisionsList = FXCollections.observableArrayList();
+    private static ObservableList<Countries> countriesList = FXCollections.observableArrayList();
+    private static ObservableList<String> countryNameList = FXCollections.observableArrayList();
     private static ObservableList<String> divisionCanadaList = FXCollections.observableArrayList();
     private static ObservableList<String> divisionUSAList = FXCollections.observableArrayList();
     private static ObservableList<String> divisionUKList = FXCollections.observableArrayList();
@@ -58,10 +64,16 @@ public class CustomersDao {
 
     private static void populateCountryList() {
         String sql = "SELECT * FROM countries";
+        countriesList.clear();
+        countryNameList.clear();
         try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()){
             while (rs.next()) {
-                countryList.add(rs.getString("Country"));
+                Countries newCountry = new Countries();
+                newCountry.setCountryID(rs.getInt("Country_ID"));
+                newCountry.setCountryName(rs.getString("Country"));
+                countriesList.add(newCountry);
+                countryNameList.add(rs.getString("Country"));
             }
         }
         catch (SQLException e) {
@@ -71,12 +83,18 @@ public class CustomersDao {
 
     private static void populateAllDivisionsList() {
         String sql = "SELECT * FROM first_level_divisions";
+        divisionsList.clear();
         divisionCanadaList.clear();
         divisionUSAList.clear();
         divisionUKList.clear();
         try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()){
             while (rs.next()) {
+                FirstLevelDivisions newDivision = new FirstLevelDivisions();
+                newDivision.setDivisionID(rs.getInt("Division_ID"));
+                newDivision.setDivisionName(rs.getString("Division"));
+                newDivision.setCountryID(rs.getInt("Country_ID"));
+                divisionsList.add(newDivision);
                 if (rs.getInt("Country_ID") == 1) {
                     divisionUSAList.add(rs.getString("Division"));
                 }
@@ -128,16 +146,35 @@ public class CustomersDao {
         return wasDeleted;
     }
 
-    public static int addCustomer() {
-        return 0;
+    public static int addCustomer(String name, String address, String postalCode, String phone, Instant create, String createBy, Instant update, String updateBy, int divisionID) {
+        String sql = "INSERT INTO client_schedule.customers(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int wasAdded = 0;
+
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setTimestamp(5, Timestamp.from(create));
+            ps.setString(6, createBy);
+            ps.setTimestamp(7, Timestamp.from(update));
+            ps.setString(8, updateBy);
+            ps.setInt(9, divisionID);
+
+            wasAdded = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wasAdded;
     }
 
     public static ObservableList<String> getCustomerIDList() {
         return customerNameList;
     }
 
-    public static ObservableList<String> getCountryList() {
-        return countryList;
+    public static ObservableList<String> getCountryNameList() {
+        return countryNameList;
     }
 
     public static ObservableList<String> getDivisionCanadaList() {
@@ -150,6 +187,22 @@ public class CustomersDao {
 
     public static ObservableList<String> getDivisionUKList() {
         return divisionUKList;
+    }
+
+    public static ObservableList<FirstLevelDivisions> getDivisionsList() {
+        return divisionsList;
+    }
+
+    public static void setDivisionsList(ObservableList<FirstLevelDivisions> divisionsList) {
+        CustomersDao.divisionsList = divisionsList;
+    }
+
+    public static ObservableList<Countries> getCountriesList() {
+        return countriesList;
+    }
+
+    public static void setCountriesList(ObservableList<Countries> countriesList) {
+        CustomersDao.countriesList = countriesList;
     }
 
     public static int getCustomerIDNumber(String customerName) {
@@ -170,5 +223,13 @@ public class CustomersDao {
         else {
             return null;
         }
+    }
+
+    public  static int getDivisionID(String divisionName) {
+        Optional<FirstLevelDivisions> optionalDivision = divisionsList.stream().filter(d -> d.getDivisionName().equals(divisionName)).findFirst();
+        if (optionalDivision.isPresent()) {
+            return optionalDivision.get().getDivisionID();
+        }
+        else return -1;
     }
 }
