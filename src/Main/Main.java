@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.Optional;
@@ -61,7 +62,13 @@ public class Main extends Application {
         int wasAdded = DAO.AppointmentDao.addNewAppointment("", "description","", "type", now, now, now, "me", now, "me", 1, 1, 1);
         System.out.println(wasAdded);*/
         //Locale.setDefault(new Locale("fr"));
-
+        ZonedDateTime westCoast = ZonedDateTime.now(ZoneId.of("America/Los_Angeles"));
+        System.out.println(westCoast);
+        ZonedDateTime convertedEST = westCoast.withZoneSameInstant(ZoneId.of("EST5EDT"));
+        ZonedDateTime convertedNewYork = westCoast.withZoneSameInstant(ZoneId.of("America/New_York"));
+        System.out.println(convertedEST);
+        System.out.println(convertedNewYork);
+        
         launch(args);
 
         DAO.DatabaseConnection.closeConnection();

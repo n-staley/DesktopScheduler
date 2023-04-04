@@ -4,23 +4,30 @@ import Model.Appointment;
 import Utility.DateTimeAdjustment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 
 import java.sql.*;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.temporal.IsoFields;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AppointmentDao {
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     private static ObservableList<Appointment> weekAppointments = FXCollections.observableArrayList();
     private static ObservableList<Appointment> monthAppointments = FXCollections.observableArrayList();
+    private static ObservableList<String> appointmentTypeList = FXCollections.observableArrayList();
+    private static Set<String> typeSet = new HashSet<>();
 
     public static void populateAppointmentLists() {
         String sql = "SELECT * FROM appointments";
         allAppointments.clear();
         weekAppointments.clear();
         monthAppointments.clear();
+        appointmentTypeList.clear();
+        typeSet.clear();
 
         try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
@@ -35,7 +42,6 @@ public class AppointmentDao {
                     newAppointment.setLocation(rs.getString("Location"));
                     if (rs.wasNull()) newAppointment.setLocation("null");
                     newAppointment.setType(rs.getString("Type"));
-                    if (rs.wasNull()) newAppointment.setType("null");
                     newAppointment.setStart(DateTimeAdjustment.changeToCurrentTimezone(rs.getTimestamp("Start").toInstant()));
                     newAppointment.setEnd(DateTimeAdjustment.changeToCurrentTimezone(rs.getTimestamp("End").toInstant()));
                     newAppointment.setCustID(rs.getInt("Customer_ID"));
@@ -43,6 +49,7 @@ public class AppointmentDao {
                     newAppointment.setContactsID(rs.getInt("Contact_ID"));
                     newAppointment.setFormattedStart(DateTimeAdjustment.formatTime(newAppointment.getStart()));
                     newAppointment.setFormattedEnd(DateTimeAdjustment.formatTime(newAppointment.getEnd()));
+                    typeSet.add(newAppointment.getType());
                     allAppointments.add(newAppointment);
 
 
@@ -55,6 +62,9 @@ public class AppointmentDao {
 
         monthAppointments = allAppointments.stream().filter(a -> a.getStart().getMonth().equals(ZonedDateTime.now().getMonth())).collect(Collectors.toCollection(FXCollections::observableArrayList));
         weekAppointments = allAppointments.stream().filter(a -> a.getStart().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) == ZonedDateTime.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        for (String s : typeSet) {
+            appointmentTypeList.add(s);
+        }
     }
 
 
@@ -181,5 +191,9 @@ public class AppointmentDao {
 
     public static void setMonthAppointments(ObservableList<Appointment> monthAppointments) {
         AppointmentDao.monthAppointments = monthAppointments;
+    }
+
+    public static ObservableList<String> getAppointmentTypeList() {
+        return appointmentTypeList;
     }
 }

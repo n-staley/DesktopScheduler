@@ -17,12 +17,28 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="reportOneTableView" prefHeight="375.0" prefWidth="1043.0">
-                          <columns>
-                            <TableColumn fx:id="reportOneAppointmentType" prefWidth="160.0" text="Type of Appointment" />
-                            <TableColumn fx:id="reportOneNumberOfAppointments" prefWidth="180.0" text="Number of Appointments" />
-                          </columns>
-                        </TableView>
+                        <ComboBox fx:id="appointmentTypeCombo" layoutX="118.0" layoutY="161.0" onAction="#appointmentTypeSelected" prefWidth="150.0" />
+                        <ComboBox fx:id="monthCombo" layoutX="380.0" layoutY="161.0" onAction="#monthSelected" prefWidth="150.0" />
+                        <Label fx:id="numberAppointments" layoutX="692.0" layoutY="165.0" text="numberAppointments">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="118.0" layoutY="104.0" text="Type of Appointment">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="373.0" layoutY="104.0" text="Month of Appointment">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="679.0" layoutY="104.0" text="Number of Appointments">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
@@ -31,7 +47,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="reportTwoTableView" prefHeight="378.0" prefWidth="1043.0">
+                        <TableView fx:id="reportTwoTableView" layoutY="50.0" prefHeight="328.0" prefWidth="1043.0">
                           <columns>
                             <TableColumn fx:id="r2Contact" prefWidth="89.0" text="Contact" />
                             <TableColumn fx:id="r2AppointmentID" prefWidth="100.0" text="Appointment ID" />
@@ -43,6 +59,12 @@
                               <TableColumn fx:id="r2CustomerID" prefWidth="83.0" text="Customer ID" />
                           </columns>
                         </TableView>
+                        <ComboBox fx:id="contactNameCombo" layoutX="231.0" layoutY="14.0" onAction="#switchContactTableView" prefWidth="150.0" />
+                        <Label layoutX="68.0" layoutY="14.0" text="Contact's Name">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
