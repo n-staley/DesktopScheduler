@@ -69,13 +69,13 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="report3Tab" text="Report 3">
+            <Tab fx:id="report3Tab" text="Appointments By Customer">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="r3TableView" prefHeight="380.0" prefWidth="1043.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="Customer" />
                             <TableColumn prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
