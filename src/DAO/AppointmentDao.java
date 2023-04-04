@@ -53,8 +53,8 @@ public class AppointmentDao {
             System.out.println(e.getMessage());
         }
 
-        monthAppointments = (ObservableList<Appointment>) allAppointments.stream().filter(a -> a.getStart().getMonth().equals(ZonedDateTime.now().getMonth())).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        weekAppointments = (ObservableList<Appointment>) allAppointments.stream().filter(a -> a.getStart().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) == ZonedDateTime.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        monthAppointments = allAppointments.stream().filter(a -> a.getStart().getMonth().equals(ZonedDateTime.now().getMonth())).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        weekAppointments = allAppointments.stream().filter(a -> a.getStart().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) == ZonedDateTime.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)).collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
 
@@ -102,9 +102,61 @@ public class AppointmentDao {
         return rowsInserted;
     }
 
-    public static int editAppointment(String title, String description, String location, String type, Instant start, Instant end, Instant lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
+    public static int editAppointment(String title, String description, String location, String type, Instant start, Instant end, Instant lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID, int appointmentID) {
         String sql = "UPDATE appointments set Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, end = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
-        return 0;
+        int rowsUpdated = 0;
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            if (title.equals("")) {
+                ps.setNull(1,Types.NULL);
+            }
+            else {
+                ps.setString(1, title);
+            }
+            if (description.equals("")) {
+                ps.setNull(2, Types.NULL);
+            }
+            else {
+                ps.setString(2,description);
+            }
+            if (location.equals("")) {
+                ps.setNull(3, Types.NULL);
+            }
+            else {
+                ps.setString(3, location);
+            }
+            ps.setString(4, type);
+            ps.setTimestamp(5, Timestamp.from(start));
+            ps.setTimestamp(6, Timestamp.from(end));
+            ps.setTimestamp(7, Timestamp.from(lastUpdate));
+            ps.setString(8, lastUpdateBy);
+            ps.setInt(9, customerID);
+            ps.setInt(10, userID);
+            ps.setInt(11, contactID);
+            ps.setInt(12, appointmentID);
+
+            rowsUpdated = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return rowsUpdated;
+    }
+
+    public static int deleteAppointmentID(int appointmentID) {
+        String sql = "DELETE FROM client_schedule.appointments WHERE Appointment_ID = ?";
+        int wasDeleted = 0;
+
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            ps.setInt(1, appointmentID);
+
+            wasDeleted = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wasDeleted;
     }
 
     public static ObservableList<Appointment> getAllAppointments() {

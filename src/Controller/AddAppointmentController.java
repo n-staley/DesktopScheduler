@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Appointment;
+
 import Utility.DateTimeAdjustment;
 import Utility.InputErrorCheck;
 import javafx.event.ActionEvent;
@@ -56,7 +56,7 @@ public class AddAppointmentController extends ViewController implements Initiali
         String errorMessage = "";
         boolean wasError = false;
         InputErrorCheck errorCheck;
-        int appointmentAdded = 0;
+        int appointmentAdded;
         String title;
         String description;
         String location;
@@ -198,6 +198,12 @@ public class AddAppointmentController extends ViewController implements Initiali
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Add Appointment Error");
+            alert.setContentText("There was an error adding the new appointment.\nPlease Contact IT Department.");
+            alert.showAndWait();
         }
     }
 
