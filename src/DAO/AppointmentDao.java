@@ -102,6 +102,11 @@ public class AppointmentDao {
         return rowsInserted;
     }
 
+    public static int editAppointment(String title, String description, String location, String type, Instant start, Instant end, Instant lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
+        String sql = "UPDATE appointments set Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, end = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+        return 0;
+    }
+
     public static ObservableList<Appointment> getAllAppointments() {
         return allAppointments;
     }

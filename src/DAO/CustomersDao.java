@@ -129,4 +129,14 @@ public class CustomersDao {
             return -1;
         }
     }
+
+    public static String getCustomerName(int customerID) {
+        Optional<Customers> optionalCustomer = customersList.stream().filter(c -> c.getCustomerID() == customerID).findFirst();
+        if (optionalCustomer.isPresent()) {
+            return optionalCustomer.get().getCustomerName();
+        }
+        else {
+            return null;
+        }
+    }
 }

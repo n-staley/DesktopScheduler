@@ -44,5 +44,46 @@ public class DateTimeAdjustment {
         return convertedTime;
     }
 
+    public static String getHour(ZonedDateTime timeInput) {
+        int hour = timeInput.getHour();
+        if (hour > 12) {
+            hour -= 12;
+        }
+        switch (hour) {
+            case 1: return "01";
+            case 2: return "02";
+            case 3: return "03";
+            case 4: return "04";
+            case 5: return "05";
+            case 6: return "06";
+            case 7: return "07";
+            case 8: return "08";
+            case 9: return "09";
+            case 10: return "10";
+            case 11: return "11";
+            case 12: return "12";
+            default: return "error";
+
+        }
+    }
+
+    public static String getMinute(ZonedDateTime timeInput) {
+        int minute = timeInput.getMinute();
+        switch (minute) {
+            case 0: return "00";
+            case 15: return "15";
+            case 30: return "30";
+            case 45: return "45";
+            default: return "error";
+        }
+    }
+
+    public static boolean amCheck(ZonedDateTime timeInput) {
+        if (timeInput.getHour() < 12) {
+            return true;
+        }
+        else return false;
+    }
+
 
 }

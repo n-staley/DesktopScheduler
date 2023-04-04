@@ -52,6 +52,15 @@ public class AppointmentDashboardController extends ViewController implements In
     }
 
     public void toEditAppointment(ActionEvent actionEvent) {
+        if (appointmentsTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No Selected Appointment");
+            alert.setContentText("Must select an appointment from the table to edit it.");
+            alert.showAndWait();
+            return;
+        }
+
+        Controller.EditAppointmentController.setAppointmentToEdit(appointmentsTableView.getSelectionModel().getSelectedItem());
         try {
             switchScene(actionEvent, "/view/EditAppointmentForm.fxml", 550, 850, "Edit Appointments");
         }

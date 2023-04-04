@@ -97,13 +97,13 @@
          </font>
       </TextField>
       <ComboBox fx:id="appointmentContactCombo" layoutX="226.0" layoutY="341.0" prefWidth="150.0" />
-      <RadioButton fx:id="startAMRadio" layoutX="393.0" layoutY="495.0" mnemonicParsing="false" selected="true" text="AM">
+      <RadioButton fx:id="startAMRadio" layoutX="393.0" layoutY="495.0" mnemonicParsing="false" text="AM">
          <toggleGroup>
             <ToggleGroup fx:id="startToggleGroup" />
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="startPMRadio" layoutX="453.0" layoutY="495.0" mnemonicParsing="false" text="PM" toggleGroup="$startToggleGroup" />
-      <RadioButton fx:id="endAMRadio" layoutX="393.0" layoutY="595.0" mnemonicParsing="false" selected="true" text="AM">
+      <RadioButton fx:id="endAMRadio" layoutX="393.0" layoutY="595.0" mnemonicParsing="false" text="AM">
          <toggleGroup>
             <ToggleGroup fx:id="endToggleGroup" />
          </toggleGroup>

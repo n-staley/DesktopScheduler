@@ -50,4 +50,13 @@ public class ContactsDao {
             return -1;
         }
     }
+    public static String getContactName (int contactID) {
+        Optional<Contacts> optionalContact = contactsList.stream().filter(c -> c.getContactID() == contactID).findFirst();
+        if (optionalContact.isPresent()) {
+            return optionalContact.get().getContactName();
+        }
+        else {
+            return null;
+        }
+    }
 }

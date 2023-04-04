@@ -88,4 +88,12 @@ public class UserDao {
         }
         else return -1;
     }
+
+    public static String getUserName(int userID) {
+        Optional<User> optionalUser = usersList.stream().filter(u -> u.getUserID() == userID).findFirst();
+        if (optionalUser.isPresent()) {
+            return optionalUser.get().getUserName();
+        }
+        else return null;
+    }
 }
