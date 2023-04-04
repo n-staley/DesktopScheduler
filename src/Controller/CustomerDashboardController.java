@@ -1,17 +1,17 @@
 package Controller;
 
+import DAO.AppointmentDao;
+import DAO.CustomersDao;
 import Model.Customers;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerDashboardController extends ViewController implements Initializable {
@@ -73,6 +73,26 @@ public class CustomerDashboardController extends ViewController implements Initi
     }
 
     public void deleteCustomer(ActionEvent actionEvent) {
+        int wasDeleted = 0;
+        if (customersTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No Selected Customer");
+            alert.setContentText("Must select a customer from the table to delete it.");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the customer and all of their appointments, do you wish to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            wasDeleted = CustomersDao.deleteCustomer(customersTableView.getSelectionModel().getSelectedItem().getCustomerID());
+        }
+        if (wasDeleted > 0) {
+            CustomersDao.populateCustomersList();
+            AppointmentDao.populateAppointmentLists();
+            customersTableView.setItems(CustomersDao.getCustomersList());
+
+        }
     }
 
     @Override

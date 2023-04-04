@@ -100,6 +100,38 @@ public class CustomersDao {
         populateAllDivisionsList();
     }
 
+    public static int deleteCustomer(int customerID) {
+        String sql = "DELETE client_schedule.customers, client_schedule.appointments \n" +
+                "FROM client_schedule.customers \n" +
+                "INNER JOIN client_schedule.appointments ON client_schedule.customers.Customer_ID = client_schedule.appointments.Customer_ID\n" +
+                "WHERE client_schedule.customers.Customer_ID = ?";
+        int wasDeleted = 0;
+
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            ps.setInt(1, customerID);
+            wasDeleted = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (wasDeleted == 0) {
+            String noAppointments = "DELETE FROM client_schedule.customers WHERE Customer_ID = ?";
+            try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(noAppointments)) {
+                ps.setInt(1, customerID);
+                wasDeleted = ps.executeUpdate();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return wasDeleted;
+    }
+
+    public static int addCustomer() {
+        return 0;
+    }
+
     public static ObservableList<String> getCustomerIDList() {
         return customerNameList;
     }
