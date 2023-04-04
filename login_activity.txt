@@ -79,3 +79,4 @@ Username: test, password: test, Date/Time: 2023-04-03T23:43:34.030807-04:00[Amer
 Username: test, password: test, Date/Time: 2023-04-03T23:57:06.229786200-04:00[America/New_York], Successful login: true
 Username: test, password: test, Date/Time: 2023-04-03T23:59:59.313858200-04:00[America/New_York], Successful login: true
 Username: test, password: test, Date/Time: 2023-04-04T00:00:55.318159200-04:00[America/New_York], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-03T22:20:57.314881600-06:00[America/Denver], Successful login: true
