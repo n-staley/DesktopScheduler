@@ -169,6 +169,28 @@ public class CustomersDao {
         return wasAdded;
     }
 
+    public static int updateCustomer(String name, String address, String postalCode, String phone, Instant update, String updateBy, int divisionID, int customerID) {
+        String sql = "UPDATE client_schedule.customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
+        int wasUpdated = 0;
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setTimestamp(5, Timestamp.from(update));
+            ps.setString(6, updateBy);
+            ps.setInt(7, divisionID);
+            ps.setInt(8, customerID);
+
+            wasUpdated = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return wasUpdated;
+    }
+
     public static ObservableList<String> getCustomerIDList() {
         return customerNameList;
     }
@@ -231,5 +253,21 @@ public class CustomersDao {
             return optionalDivision.get().getDivisionID();
         }
         else return -1;
+    }
+
+    public static String getDivisionName(int divisionID) {
+        Optional<FirstLevelDivisions> optionalDivision = divisionsList.stream().filter(d -> d.getDivisionID() == divisionID).findFirst();
+        if (optionalDivision.isPresent()) {
+            return optionalDivision.get().getDivisionName();
+        }
+        else return "error";
+    }
+
+    public static String getCountryName(int countryID) {
+        Optional<Countries> optionalCountries = countriesList.stream().filter(c -> c.getCountryID() == countryID).findFirst();
+        if (optionalCountries.isPresent()) {
+            return optionalCountries.get().getCountryName();
+        }
+        else return "error";
     }
 }

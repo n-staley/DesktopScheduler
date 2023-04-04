@@ -42,6 +42,15 @@ public class CustomerDashboardController extends ViewController implements Initi
     }
 
     public void toEditCustomer(ActionEvent actionEvent) {
+        if (customersTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No Selected Customer");
+            alert.setContentText("Must select a customer from the table to edit it.");
+            alert.showAndWait();
+            return;
+        }
+
+        EditCustomerController.setCustomerToEdit(customersTableView.getSelectionModel().getSelectedItem());
         try {
             switchScene(actionEvent, "/view/EditCustomerForm.fxml", 550, 650, "Edit Customer");
         }
