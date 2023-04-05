@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.Optional;
@@ -144,7 +145,8 @@ public class LoginController extends ViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Locale userLocale = Locale.getDefault();
-        zoneInformation.setText(userLocale.getDisplayCountry());
+        ZoneId zoneId = ZoneId.systemDefault();
+        zoneInformation.setText(zoneId.toString());
         ResourceBundle rb = ResourceBundle.getBundle("LoginLanguage", userLocale);
         loginButton.setText(rb.getString("login"));
         exitButton.setText(rb.getString("exit"));
