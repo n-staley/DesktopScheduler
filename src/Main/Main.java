@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.time.Instant;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Locale;
@@ -68,7 +69,7 @@ public class Main extends Application {
         ZonedDateTime convertedNewYork = westCoast.withZoneSameInstant(ZoneId.of("America/New_York"));
         System.out.println(convertedEST);
         System.out.println(convertedNewYork);
-        
+
         launch(args);
 
         DAO.DatabaseConnection.closeConnection();

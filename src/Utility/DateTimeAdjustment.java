@@ -3,11 +3,8 @@ package Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.Arrays;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class DateTimeAdjustment {
     private static final List<String> minutesList = Arrays.asList("00", "15", "30", "45");
     public static final ObservableList<String> hoursCombo = FXCollections.observableArrayList(hourList);
     public static final ObservableList<String> minutesCombo = FXCollections.observableArrayList(minutesList);
+    
 
     public static ZonedDateTime changeToCurrentTimezone(Instant recordedInstant) {
         ZoneId userZone = ZoneId.systemDefault();
@@ -83,6 +81,24 @@ public class DateTimeAdjustment {
             return true;
         }
         else return false;
+    }
+    
+    public static InputErrorCheck checkBusinessHours(ZonedDateTime start, ZonedDateTime end) {
+        InputErrorCheck errorCheck = new InputErrorCheck();
+
+        if (start.withZoneSameInstant(ZoneId.of("America/New_York")).getHour() < 8 || (start.withZoneSameInstant(ZoneId.of("America/New_York")).getHour() > 21) && (start.withZoneSameInstant(ZoneId.of("America/New_York")).getMinute() < 45)) {
+            errorCheck.setWasError(true);
+            errorCheck.concatErrorMessage("Start time must be between 08:00 and 21:45 EST.\n");
+        }
+        if (((end.withZoneSameInstant(ZoneId.of("America/New_York")).getHour() < 9) && (end.withZoneSameInstant(ZoneId.of("America/New_York")).getMinute() < 15)) || ((end.withZoneSameInstant(ZoneId.of("America/New_York")).getHour() > 21) && (end.withZoneSameInstant(ZoneId.of("America/New_York")).getMinute() > 0))) {
+            errorCheck.setWasError(true);
+            errorCheck.concatErrorMessage("End time must be between 08:15 and 22:00 EST.\n");
+        }
+        if ((start.withZoneSameInstant(ZoneId.of("America/New_York")).getDayOfMonth() - end.withZoneSameInstant(ZoneId.of("America/New_York")).getDayOfMonth()) != 0) {
+            errorCheck.setWasError(true);
+            errorCheck.concatErrorMessage("Appointments can not go past 22:00 EST to the next day.");
+        }
+        return errorCheck;
     }
 
 

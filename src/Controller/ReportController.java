@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.AppointmentDao;
 import DAO.ContactsDao;
+import DAO.CustomersDao;
 import DAO.ReportsDao;
 import Model.Appointment;
 import javafx.event.ActionEvent;
@@ -37,6 +38,18 @@ public class ReportController extends ViewController implements Initializable {
     public ComboBox<String> monthCombo;
     public ComboBox<String> appointmentTypeCombo;
     public ComboBox<String> contactNameCombo;
+    public TableView<Appointment> appointmentsTableView;
+    public TableColumn<Appointment, Integer> appointmentIDColumn;
+    public TableColumn<Appointment, String> titleColumn;
+    public TableColumn<Appointment, String> descriptionColumn;
+    public TableColumn<Appointment, String> locationColumn;
+    public TableColumn<Appointment, Integer> contactColumn;
+    public TableColumn<Appointment, String>typeColumn;
+    public TableColumn<Appointment, String> startDateTimeColumn;
+    public TableColumn<Appointment, String> endDateTimeColumn;
+    public TableColumn<Appointment, Integer> customerIDColumn;
+    public TableColumn<Appointment, Integer> userIDColumn;
+    public ComboBox<String> customerNameCombo;
 
     public void exit(ActionEvent actionEvent) {
         exitProgram(mainPane);
@@ -70,15 +83,21 @@ public class ReportController extends ViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appointmentTypeCombo.setItems(AppointmentDao.getAppointmentTypeList());
-        appointmentTypeCombo.setValue(AppointmentDao.getAppointmentTypeList().get(0));
+        //Report one initialize
         monthCombo.setItems(ReportsDao.MonthList);
         monthCombo.setValue(ReportsDao.MonthList.get(0));
-        numberAppointments.setText(String.valueOf(ReportsDao.appointmentTypePerMonth(appointmentTypeCombo.getValue(), monthCombo.getValue())));
-
+        if (AppointmentDao.getAppointmentTypeList().size() > 0) {
+            appointmentTypeCombo.setItems(AppointmentDao.getAppointmentTypeList());
+            appointmentTypeCombo.setValue(AppointmentDao.getAppointmentTypeList().get(0));
+            numberAppointments.setText(String.valueOf(ReportsDao.appointmentTypePerMonth(appointmentTypeCombo.getValue(), monthCombo.getValue())));
+        }
+        else {
+            numberAppointments.setText("Must enter an appointment.");
+        }
         contactNameCombo.setItems(ContactsDao.getContactsNameList());
         contactNameCombo.setValue(ContactsDao.getContactsNameList().get(0));
 
+        //Report two initialize
         ReportsDao.appointmentsByContact(ContactsDao.getContactIDNumber(contactNameCombo.getValue()));
         reportTwoTableView.setItems(ReportsDao.getAppointmentsByContactList());
         r2Contact.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
@@ -89,10 +108,34 @@ public class ReportController extends ViewController implements Initializable {
         r2StartDateTime.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
         r2EndDateTime.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
         r2CustomerID.setCellValueFactory(new PropertyValueFactory<>("custID"));
+
+        if (CustomersDao.getCustomerNameList().size() > 0) {
+            customerNameCombo.setItems(CustomersDao.getCustomerNameList());
+            customerNameCombo.setValue(CustomersDao.getCustomerNameList().get(0));
+            ReportsDao.appointmentsByCustomer(CustomersDao.getCustomerIDNumber(customerNameCombo.getValue()));
+        }
+        appointmentsTableView.setItems(ReportsDao.getAppointmentsByCustomersList());
+        appointmentIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+        endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("custID"));
+        userIDColumn.setCellValueFactory(new PropertyValueFactory<>("usersID"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
+
+
     }
 
     public void switchContactTableView(ActionEvent actionEvent) {
         ReportsDao.appointmentsByContact(ContactsDao.getContactIDNumber(contactNameCombo.getValue()));
         reportTwoTableView.setItems(ReportsDao.getAppointmentsByContactList());
+    }
+
+    public void switchCustomer(ActionEvent actionEvent) {
+        ReportsDao.appointmentsByCustomer(CustomersDao.getCustomerIDNumber(customerNameCombo.getValue()));
+        appointmentsTableView.setItems(ReportsDao.getAppointmentsByCustomersList());
     }
 }

@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDao;
 import Model.Appointment;
 import Utility.DateTimeAdjustment;
 import Utility.InputErrorCheck;
@@ -178,7 +179,24 @@ public class EditAppointmentController extends ViewController implements Initial
             wasError = true;
             errorMessage = errorMessage.concat("Start Date and Time must be before End Date and Time.\n");
         }
-
+        errorCheck = Utility.DateTimeAdjustment.checkBusinessHours(startDateTime, endDateTime);
+        if (errorCheck.getWasError()) {
+            wasError = true;
+            errorMessage = errorMessage.concat(errorCheck.getErrorMessage());
+        }
+        for (Appointment appointment : AppointmentDao.getAllAppointments()) {
+            if (appointmentToEdit.getAppointmentID() != appointment.getAppointmentID()) {
+                if (startDateTime.equals(appointment.getStart()) || endDateTime.equals(appointment.getEnd()) ||
+                        (startDateTime.isAfter(appointment.getStart()) && startDateTime.isBefore(appointment.getEnd())) ||
+                        (endDateTime.isAfter(appointment.getStart()) && endDateTime.isBefore(appointment.getEnd())) ||
+                        (appointment.getStart().isAfter(startDateTime) && appointment.getStart().isBefore(endDateTime)) ||
+                        (appointment.getEnd().isAfter(startDateTime) && appointment.getEnd().isBefore(endDateTime))) {
+                    wasError = true;
+                    errorMessage = errorMessage.concat("This appointment overlaps with another appointment please reschedule.\n");
+                    break;
+                }
+            }
+        }
 
         if (wasError) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

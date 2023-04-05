@@ -270,4 +270,8 @@ public class CustomersDao {
         }
         else return "error";
     }
+
+    public static ObservableList<String> getCustomerNameList() {
+        return customerNameList;
+    }
 }
