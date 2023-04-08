@@ -1,5 +1,11 @@
 package Controller;
 
+import DAO.AppointmentDao;
+import DAO.ContactsDao;
+import DAO.CustomersDao;
+import DAO.UserDao;
+import Model.Appointment;
+import Utility.LoginLogger;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -85,7 +92,7 @@ public class LoginController extends ViewController implements Initializable {
         if (errorCheck) {
             username = usernameTextBox.getText();
             password = passwordTextBox.getText();
-            Utility.LoginLogger.log(username, password, loginDateTime, loginSuccess);
+            LoginLogger.log(username, password, loginDateTime, loginSuccess);
 
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -102,8 +109,8 @@ public class LoginController extends ViewController implements Initializable {
         password = passwordTextBox.getText();
 
 
-        if (DAO.UserDao.loginQuery(username, password) == 0) {
-            Utility.LoginLogger.log(username, password, loginDateTime, loginSuccess);
+        if (UserDao.loginQuery(username, password) == 0) {
+            LoginLogger.log(username, password, loginDateTime, loginSuccess);
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(errorRB.getString("errorTitle"));
             alert.setHeaderText(errorRB.getString("errorHeader"));
@@ -112,17 +119,36 @@ public class LoginController extends ViewController implements Initializable {
 
         } else {
             boolean successfulLogin = true;
-            Utility.LoginLogger.log(username, password, loginDateTime, successfulLogin);
-            DAO.AppointmentDao.populateAppointmentLists();
-            DAO.CustomersDao.populateAllCustomersLists();
-            DAO.UserDao.createUserList();
-            DAO.UserDao.setUser(username);
-            DAO.ContactsDao.setContactsList();
+            LoginLogger.log(username, password, loginDateTime, successfulLogin);
+            AppointmentDao.populateAppointmentLists();
+            CustomersDao.populateAllCustomersLists();
+            UserDao.createUserList();
+            UserDao.setUser(username);
+            ContactsDao.setContactsList();
 
             try {
                 switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
+            }
+
+            List<Appointment> appointmentsFifteenMin =  AppointmentDao.getAllAppointments().stream().filter(a -> a.getUsersID() == UserDao.getLoggedInUser().getUserID()).filter(a -> a.getStart().isAfter(loginDateTime)).filter(a -> a.getStart().isBefore(loginDateTime.plusMinutes(15))).toList();
+            if (appointmentsFifteenMin.size() > 0) {
+                String upcomingAppointments = "";
+                for (Appointment appointment : appointmentsFifteenMin) {
+                    upcomingAppointments = upcomingAppointments.concat(UserDao.getLoggedInUser().getUserName() + " has appointment number: " + appointment.getAppointmentID() + " at " + appointment.getFormattedStart() + ".\n");
+                }
+                Alert upcomingAppointment = new Alert(Alert.AlertType.INFORMATION);
+                upcomingAppointment.setHeaderText("Appointments Next 15 Minutes");
+                upcomingAppointment.setContentText(upcomingAppointments);
+                upcomingAppointment.showAndWait();
+
+            }
+            else {
+                Alert upcomingAppointment = new Alert(Alert.AlertType.INFORMATION);
+                upcomingAppointment.setHeaderText("Appointments Next 15 Minutes");
+                upcomingAppointment.setContentText("You do not have any appointments in the next fifteen minutes.");
+                upcomingAppointment.showAndWait();
             }
         }
     }

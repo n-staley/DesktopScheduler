@@ -93,13 +93,20 @@ public class CustomerDashboardController extends ViewController implements Initi
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the customer and all of their appointments, do you wish to continue?");
         Optional<ButtonType> result = alert.showAndWait();
 
+        Customers customerToDelete = customersTableView.getSelectionModel().getSelectedItem();
+
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            wasDeleted = CustomersDao.deleteCustomer(customersTableView.getSelectionModel().getSelectedItem().getCustomerID());
+            wasDeleted = CustomersDao.deleteCustomer(customerToDelete.getCustomerID());
         }
         if (wasDeleted > 0) {
             CustomersDao.populateCustomersList();
             AppointmentDao.populateAppointmentLists();
             customersTableView.setItems(CustomersDao.getCustomersList());
+
+            Alert alertWasDeleted = new Alert(Alert.AlertType.INFORMATION);
+            alertWasDeleted.setHeaderText("Customer Deleted");
+            alertWasDeleted.setContentText(customerToDelete.getCustomerName() + " was deleted along with their appointments.");
+            alertWasDeleted.showAndWait();
 
         }
     }

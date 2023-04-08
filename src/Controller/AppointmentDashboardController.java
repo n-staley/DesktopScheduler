@@ -99,8 +99,9 @@ public class AppointmentDashboardController extends ViewController implements In
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the appointment, do you wish to continue?");
         Optional<ButtonType> result = alert.showAndWait();
 
+        Appointment appointmentToDelete = appointmentsTableView.getSelectionModel().getSelectedItem();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            wasDeleted = DAO.AppointmentDao.deleteAppointmentID(appointmentsTableView.getSelectionModel().getSelectedItem().getAppointmentID());
+            wasDeleted = DAO.AppointmentDao.deleteAppointmentID(appointmentToDelete.getAppointmentID());
         }
         if (wasDeleted > 0) {
             DAO.AppointmentDao.populateAppointmentLists();
@@ -113,6 +114,11 @@ public class AppointmentDashboardController extends ViewController implements In
             if (viewAllRadio.isSelected()) {
                 appointmentsTableView.setItems(DAO.AppointmentDao.getAllAppointments());
             }
+            Alert alertWasDeleted = new Alert(Alert.AlertType.INFORMATION);
+            alertWasDeleted.setHeaderText("Appointment Deleted");
+            alertWasDeleted.setContentText("Appointment number: " + appointmentToDelete.getAppointmentID() + " with type: " + appointmentToDelete.getType() + " was deleted.");
+            alertWasDeleted.showAndWait();
+
         }
 
     }

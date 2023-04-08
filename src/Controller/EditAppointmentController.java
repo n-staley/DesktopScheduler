@@ -208,13 +208,28 @@ public class EditAppointmentController extends ViewController implements Initial
 
         appointmentUpdated = DAO.AppointmentDao.editAppointment(title, description, location, type, start, end, lastUpdate, lastUpdateBy, customerID, userID, contactID, appointmentID);
 
-        if (appointmentUpdated == 1) {
+        if (appointmentUpdated > 0) {
             DAO.AppointmentDao.populateAppointmentLists();
             try {
                 switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+            if (title.equals(appointmentToEdit.getTitle()) && description.equals(appointmentToEdit.getDescription()) && type.equals(appointmentToEdit.getType())
+                    && location.equals(appointmentToEdit.getLocation()) && start.equals(appointmentToEdit.getStart().toInstant()) && end.equals(appointmentToEdit.getEnd().toInstant())
+                    && customerID == appointmentToEdit.getCustID() && userID == appointmentToEdit.getUsersID() && contactID == appointmentToEdit.getContactsID()) {
+                Alert alertWasUpdated = new Alert(Alert.AlertType.INFORMATION);
+                alertWasUpdated.setHeaderText("Appointment Updated");
+                alertWasUpdated.setContentText("Appointment updated with no changes.");
+                alertWasUpdated.showAndWait();
+            }
+            else {
+                Alert alertWasUpdated = new Alert(Alert.AlertType.INFORMATION);
+                alertWasUpdated.setHeaderText("Appointment Updated");
+                alertWasUpdated.setContentText("The appointment was updated.");
+                alertWasUpdated.showAndWait();
+            }
+
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
