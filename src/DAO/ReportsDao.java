@@ -10,12 +10,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This class is responsible for doing the database queries for the reports and holding the reports observable lists.
+ * @author Nicholas Staley
+ */
 public class ReportsDao {
+    /**
+     * Holds the observable list of Months in the year.
+     */
     public static final ObservableList<String> MonthList = FXCollections.observableList(List.of("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
+    /**
+     * Holds the observable list of appointments for a specific contact.
+     */
     private static ObservableList<Appointment> appointmentsByContactList = FXCollections.observableArrayList();
+    /**
+     * Holds the observable list of appointments for a specific customer.
+     */
     private static ObservableList<Appointment> appointmentsByCustomersList = FXCollections.observableArrayList();
 
-
+    /**
+     * This method takes a month and a type of appointment and returns the count for the number of the type of appointment in selected month.
+     * @param type The type of appointment
+     * @param month The month for appointment type to be counted in
+     * @return Returns an integer of the count of appointment type in the selected month.
+     */
     public static int appointmentTypePerMonth(String type, String month) {
         String sql = "SELECT COUNT(*) FROM appointments WHERE Type = ? AND MONTH(Start) = ?";
         int count = 0;
@@ -49,6 +67,10 @@ public class ReportsDao {
         return count;
     }
 
+    /**
+     * This method creates a list of appointments that the provided contact has.
+     * @param contactID The id number of the chosen contact
+     */
     public static void appointmentsByContact(int contactID) {
         String sql = "SELECT * FROM client_schedule.appointments WHERE Contact_ID = ?";
         appointmentsByContactList.clear();
@@ -82,6 +104,10 @@ public class ReportsDao {
         }
     }
 
+    /**
+     * This method creates a list of appointments that the provided customer has.
+     * @param customerID The id number of the chosen customer
+     */
     public static void appointmentsByCustomer(int customerID) {
         String sql = "SELECT * FROM client_schedule.appointments WHERE Customer_ID = ?";
         appointmentsByCustomersList.clear();
@@ -115,10 +141,18 @@ public class ReportsDao {
         }
     }
 
+    /**
+     * This method gets the appointment by contact observable list.
+     * @return Returns an observable list of appointments by contact.
+     */
     public static ObservableList<Appointment> getAppointmentsByContactList() {
         return appointmentsByContactList;
     }
 
+    /**
+     * This method gets the appointment by customer observable list.
+     * @return Returns an observable list of appointments by customer.
+     */
     public static ObservableList<Appointment> getAppointmentsByCustomersList() {
         return appointmentsByCustomersList;
     }

@@ -215,16 +215,8 @@ public class CustomersDao {
         return divisionsList;
     }
 
-    public static void setDivisionsList(ObservableList<FirstLevelDivisions> divisionsList) {
-        CustomersDao.divisionsList = divisionsList;
-    }
-
     public static ObservableList<Countries> getCountriesList() {
         return countriesList;
-    }
-
-    public static void setCountriesList(ObservableList<Countries> countriesList) {
-        CustomersDao.countriesList = countriesList;
     }
 
     public static int getCustomerIDNumber(String customerName) {
