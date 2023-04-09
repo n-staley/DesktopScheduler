@@ -8,81 +8,119 @@ import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DateTimeAdjustment {
+/**
+ * This class contains date time conversion methods and time checking methods. This allows the code to be cleaner and more
+ * concise.
+ * @author Nicholas Staley
+ */
+public abstract class DateTimeAdjustment {
+    /**
+     * Holds a final list of hours used in scheduling appointments.
+     */
     private static final List<String> hourList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+    /**
+     * Holds a final list of minutes used in scheduling appointments.
+     */
     private static final List<String> minutesList = Arrays.asList("00", "15", "30", "45");
+    /**
+     * Holds the observable list of hours to populate combo boxes with.
+     */
     public static final ObservableList<String> hoursCombo = FXCollections.observableArrayList(hourList);
+    /**
+     * Holds the observable list of minutes to populate combo boxes with.
+     */
     public static final ObservableList<String> minutesCombo = FXCollections.observableArrayList(minutesList);
-    
 
+    /**
+     * This method converts an instant to the zoned date time of the person using the program.
+     * @param recordedInstant The instant to be converted
+     * @return Returns a zoned date time of the instant that was supplied.
+     */
     public static ZonedDateTime changeToCurrentTimezone(Instant recordedInstant) {
         ZoneId userZone = ZoneId.systemDefault();
-        ZonedDateTime timeZone = recordedInstant.atZone(userZone);
-        return timeZone;
+        return recordedInstant.atZone(userZone);
     }
 
-    public static Instant changeToUTC(ZonedDateTime timeToChange) {
-        Instant instant = timeToChange.toInstant();
-        System.out.println(timeToChange);
-        System.out.println(instant);
-
-        return instant;
-    }
-
+    /**
+     * This method takes a zoned date time and converts it to a formatted string for use in the program.
+     * @param zonedTime The zoned date time supplied
+     * @return Returns a string of a formatted date and time.
+     */
     public static String formatTime(ZonedDateTime zonedTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        String formattedString = zonedTime.format(formatter);
-        return formattedString;
+        return zonedTime.format(formatter);
     }
 
+    /**
+     * This method converts a string to a zoned date time of the system that is running the program.
+     * @param inputTime the string input time that is to be converted
+     * @return Returns a zoned date time of the string that was supplied.
+     */
     public static ZonedDateTime convertStringToZoned(String inputTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
         LocalDateTime localDateTime = LocalDateTime.parse(inputTime, formatter);
-        ZonedDateTime convertedTime = localDateTime.atZone(ZoneId.systemDefault());
-        return convertedTime;
+        return localDateTime.atZone(ZoneId.systemDefault());
     }
 
+    /**
+     * This method takes a zoned date time and returns a string of the hour of the time provided.
+     * @param timeInput The zoned date time to be converted
+     * @return Returns a string of the hour of the supplied zoned date time.
+     */
     public static String getHour(ZonedDateTime timeInput) {
         int hour = timeInput.getHour();
         if (hour > 12) {
             hour -= 12;
         }
-        switch (hour) {
-            case 1: return "01";
-            case 2: return "02";
-            case 3: return "03";
-            case 4: return "04";
-            case 5: return "05";
-            case 6: return "06";
-            case 7: return "07";
-            case 8: return "08";
-            case 9: return "09";
-            case 10: return "10";
-            case 11: return "11";
-            case 12: return "12";
-            default: return "error";
-
-        }
+        return switch (hour) {
+            case 1 -> "01";
+            case 2 -> "02";
+            case 3 -> "03";
+            case 4 -> "04";
+            case 5 -> "05";
+            case 6 -> "06";
+            case 7 -> "07";
+            case 8 -> "08";
+            case 9 -> "09";
+            case 10 -> "10";
+            case 11 -> "11";
+            case 12 -> "12";
+            default -> "error";
+        };
     }
 
+    /**
+     * This method takes a zoned date time and returns a string of the minutes in the zoned date time.
+     * @param timeInput The zoned date time to be converted
+     * @return Returns a string of the minutes of the supplied zoned date time.
+     */
     public static String getMinute(ZonedDateTime timeInput) {
         int minute = timeInput.getMinute();
-        switch (minute) {
-            case 0: return "00";
-            case 15: return "15";
-            case 30: return "30";
-            case 45: return "45";
-            default: return "error";
-        }
+        return switch (minute) {
+            case 0 -> "00";
+            case 15 -> "15";
+            case 30 -> "30";
+            case 45 -> "45";
+            default -> "error";
+        };
     }
 
+    /**
+     * This method checks if the zoned date time is in the am.
+     * @param timeInput The zoned date time to be checked
+     * @return Returns a true boolean if the supplied time is in the am or false if it is pm.
+     */
     public static boolean amCheck(ZonedDateTime timeInput) {
-        if (timeInput.getHour() < 12) {
-            return true;
-        }
-        else return false;
+        return timeInput.getHour() < 12;
     }
-    
+
+    /**
+     * This method checks to see if the supplied appointment start and end times falls between the business hours of 08:00 and 22:00 est.
+     * @param start The start time of the appointment
+     * @param end The end time of the appointment
+     * @return Returns an InputErrorCheck with a false boolean if the appointment was between business hour or a true boolean and error
+     * message if the appointment falls outside business hours.
+     */
     public static InputErrorCheck checkBusinessHours(ZonedDateTime start, ZonedDateTime end) {
         InputErrorCheck errorCheck = new InputErrorCheck();
 
