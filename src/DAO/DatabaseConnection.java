@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 
 /**
  * This class is used to create a connection to the database, and to close the connection when done.
+ * Inspired from the Connecting to the Database (IntelliJ) Webinar:
+ * https://wgu.webex.com/recordingservice/sites/wgu/recording/e0de37fdf5471039aefd00505681be2e/playback
  * @author Nicholas Staley
  */
 public abstract class DatabaseConnection {
