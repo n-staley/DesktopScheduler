@@ -80,4 +80,4 @@ Directions to run program:
 
 
 The additional report that I included in the program is a list of appointments based on the selected customer.
-This shows every appointment that each individual customer has scheduled.
+This allows the user to select a customer from a combo box and then view all of that customer's appointments.
