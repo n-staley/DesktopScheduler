@@ -13,6 +13,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the appointment dashboard, and add functionality.
+ * @author Nicholas Staley
+ */
 public class AppointmentDashboardController extends ViewController implements Initializable {
     public TableView<Appointment> appointmentsTableView;
     public TableColumn<Appointment, Integer> appointmentIDColumn;
@@ -38,6 +42,10 @@ public class AppointmentDashboardController extends ViewController implements In
     public AnchorPane mainPane;
     public RadioButton viewAllRadio;
 
+    /**
+     * This method changes scenes to add appointment.
+     * @param actionEvent Add Appointment button clicked
+     */
     public void toAddAppointment(ActionEvent actionEvent) {
         try {
             switchScene(actionEvent, "/view/AddAppointmentForm.fxml", 550, 850, "Add Appointments");
@@ -47,6 +55,11 @@ public class AppointmentDashboardController extends ViewController implements In
         }
     }
 
+    /**
+     * This method changes scenes to edit appointment if there was an appointment selected in the table view. It then passes
+     * the appointment that is being edited to the edit appointment controller.
+     * @param actionEvent Edit Appointment button clicked with appointment selected in tableview
+     */
     public void toEditAppointment(ActionEvent actionEvent) {
         if (appointmentsTableView.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -65,28 +78,44 @@ public class AppointmentDashboardController extends ViewController implements In
         }
     }
 
+    /**
+     * This method changes scenes to the customer dashboard.
+     * @param actionEvent View Customers button clicked
+     */
     public void toViewCustomers(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method changes scenes to the reports form.
+     * @param actionEvent View Reports button clicked
+     */
     public void toViewReports(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/ReportsForm.fxml", 1200, 600, "Reports DashBoard");
+            switchScene(actionEvent, "/view/ReportsForm.fxml", 1200, 600, "Reports Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method exits the program.
+     * @param actionEvent Exit button clicked
+     */
     public void exit(ActionEvent actionEvent) {
         exitProgram(mainPane);
     }
 
+    /**
+     * This method deletes the selected appointment, and gives a message of the appointment that was deleted when done.
+     * @param actionEvent Delete button clicked with an appointment selected in tableview
+     */
     public void deleteAppointment(ActionEvent actionEvent) {
         int wasDeleted = 0;
         if (appointmentsTableView.getSelectionModel().getSelectedItem() == null) {
@@ -123,6 +152,12 @@ public class AppointmentDashboardController extends ViewController implements In
 
     }
 
+    /**
+     * This method initializes the appointment dashboard with the View week radio button selected and the table view
+     * populated with the week appointment list.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentsTableView.setItems(DAO.AppointmentDao.getWeekAppointments());
@@ -138,14 +173,26 @@ public class AppointmentDashboardController extends ViewController implements In
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
     }
 
+    /**
+     * This method changes the table view to show the current week's appointments.
+     * @param actionEvent View Week radio button selected
+     */
     public void viewWeekSelected(ActionEvent actionEvent) {
         appointmentsTableView.setItems(DAO.AppointmentDao.getWeekAppointments());
     }
 
+    /**
+     * This method changes the table view to show the current month's appointments.
+     * @param actionEvent View Month radio button selected
+     */
     public void viewMonthSelected(ActionEvent actionEvent) {
         appointmentsTableView.setItems(DAO.AppointmentDao.getMonthAppointments());
     }
 
+    /**
+     * This method changes the table view to show all the appointments.
+     * @param actionEvent View All radio button selected
+     */
     public void viewAllSelected(ActionEvent actionEvent) {
         appointmentsTableView.setItems(DAO.AppointmentDao.getAllAppointments());
     }

@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the reports form, giving it its functionality.
+ * @author Nicholas Staley
+ */
 public class ReportController extends ViewController implements Initializable {
     public TabPane reportHolder;
     public Tab reportOneTab;
@@ -29,7 +33,6 @@ public class ReportController extends ViewController implements Initializable {
     public TableColumn<Appointment, String> r2EndDateTime;
     public TableColumn<Appointment, Integer> r2CustomerID;
     public Tab report3Tab;
-    public TableView r3TableView;
     public Button exitButton;
     public Button viewCustomersButton;
     public Button viewAppointmentsButton;
@@ -51,36 +54,63 @@ public class ReportController extends ViewController implements Initializable {
     public TableColumn<Appointment, Integer> userIDColumn;
     public ComboBox<String> customerNameCombo;
 
+    /**
+     * This method is used to exit the program.
+     * @param actionEvent Exit button clicked
+     */
     public void exit(ActionEvent actionEvent) {
         exitProgram(mainPane);
     }
 
+    /**
+     * This method is used to switch scenes to the customers' dashboard.
+     * @param actionEvent View Customers button clicked
+     */
     public void toViewCustomers(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method is used to switch scenes to the appointments' dashboard.
+     * @param actionEvent View Appointments button clicked
+     */
     public void toViewAppointments(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method sets the appointments count to the number of appointments by type per month search.
+     * @param actionEvent Selection made in the appointment type combo box
+     */
     public void appointmentTypeSelected(ActionEvent actionEvent) {
         numberAppointments.setText(String.valueOf(ReportsDao.appointmentTypePerMonth(appointmentTypeCombo.getValue(), monthCombo.getValue())));
     }
 
+    /**
+     * This method sets the appointments count to the number of appointments by type per month search.
+     * @param actionEvent Selection made in the month combo box
+     */
     public void monthSelected(ActionEvent actionEvent) {
         numberAppointments.setText(String.valueOf(ReportsDao.appointmentTypePerMonth(appointmentTypeCombo.getValue(), monthCombo.getValue())));
     }
 
+    /**
+     * This method initializes the reports scene by setting the first report to have the first appointment type and the
+     * first month selections. Then it sets the table view in report two with the appointments by contact list. Finally,
+     * it sets the table view in the third report to appointments by customer list.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Report one initialize
@@ -129,11 +159,19 @@ public class ReportController extends ViewController implements Initializable {
 
     }
 
+    /**
+     * This method changes the report two table view to the currently selected contact's appointments.
+     * @param actionEvent Selected a contact from the contacts combo box.
+     */
     public void switchContactTableView(ActionEvent actionEvent) {
         ReportsDao.appointmentsByContact(ContactsDao.getContactIDNumber(contactNameCombo.getValue()));
         reportTwoTableView.setItems(ReportsDao.getAppointmentsByContactList());
     }
 
+    /**
+     * This method changes the report three table view to the currently selected customer's appointments
+     * @param actionEvent Selection made in the customer name combo box.
+     */
     public void switchCustomer(ActionEvent actionEvent) {
         ReportsDao.appointmentsByCustomer(CustomersDao.getCustomerIDNumber(customerNameCombo.getValue()));
         appointmentsTableView.setItems(ReportsDao.getAppointmentsByCustomersList());

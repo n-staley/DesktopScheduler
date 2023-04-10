@@ -36,7 +36,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="customerIDText" editable="false" layoutX="240.0" layoutY="144.0" prefHeight="25.0" prefWidth="199.0">
+      <TextField fx:id="customerIDText" editable="false" layoutX="240.0" layoutY="144.0" prefHeight="25.0" prefWidth="199.0" text="Auto Generated">
          <font>
             <Font size="16.0" />
          </font>

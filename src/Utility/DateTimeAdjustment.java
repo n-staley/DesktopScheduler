@@ -63,7 +63,8 @@ public abstract class DateTimeAdjustment {
     }
 
     /**
-     * This method takes a zoned date time and returns a string of the hour of the time provided.
+     * This method takes a zoned date time and returns a string of the hour of the time provided. Uses an enhanced switch
+     * for better readability and more concise code.
      * @param timeInput The zoned date time to be converted
      * @return Returns a string of the hour of the supplied zoned date time.
      */
@@ -90,7 +91,8 @@ public abstract class DateTimeAdjustment {
     }
 
     /**
-     * This method takes a zoned date time and returns a string of the minutes in the zoned date time.
+     * This method takes a zoned date time and returns a string of the minutes in the zoned date time. Uses an enhanced
+     * switch for better readability and more concise code.
      * @param timeInput The zoned date time to be converted
      * @return Returns a string of the minutes of the supplied zoned date time.
      */

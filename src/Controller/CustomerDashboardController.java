@@ -14,6 +14,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the customer dashboard scene, and provides functionality.
+ * @author Nicholas Staley
+ */
 public class CustomerDashboardController extends ViewController implements Initializable {
     public TableView<Customers> customersTableView;
     public TableColumn<Customers, Integer> customerIDColumn;
@@ -32,6 +36,10 @@ public class CustomerDashboardController extends ViewController implements Initi
     public Button deleteCustomerButton;
     public AnchorPane mainPane;
 
+    /**
+     * This method changes scenes to the add customer scene.
+     * @param actionEvent Add Customer button clicked
+     */
     public void toAddCustomer(ActionEvent actionEvent) {
         try {
             switchScene(actionEvent, "/view/AddCustomerForm.fxml", 550, 650, "Add Customer");
@@ -41,6 +49,11 @@ public class CustomerDashboardController extends ViewController implements Initi
         }
     }
 
+    /**
+     * This method changes scenes to the edit customer scene, and passes the customer to edit to the controller if a
+     * customer is selected in the table view.
+     * @param actionEvent Edit customer button clicked
+     */
     public void toEditCustomer(ActionEvent actionEvent) {
         if (customersTableView.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -59,28 +72,44 @@ public class CustomerDashboardController extends ViewController implements Initi
         }
     }
 
+    /**
+     * This method changes scenes to the appointment dashboard.
+     * @param actionEvent View Appointments button is clicked
+     */
     public void toViewAppointments(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method changes scenes to the Reports form.
+     * @param actionEvent View Reports button clicked
+     */
     public void toViewReports(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/ReportsForm.fxml", 1200, 600, "Reports DashBoard");
+            switchScene(actionEvent, "/view/ReportsForm.fxml", 1200, 600, "Reports Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method exits the program.
+     * @param actionEvent Exit button clicked
+     */
     public void exit(ActionEvent actionEvent) {
         exitProgram(mainPane);
     }
 
+    /**
+     * This method deletes the selected customer along with their appointments if a customer is selected.
+     * @param actionEvent Delete button clicked with a customer selected in tableview
+     */
     public void deleteCustomer(ActionEvent actionEvent) {
         int wasDeleted = 0;
         if (customersTableView.getSelectionModel().getSelectedItem() == null) {
@@ -111,6 +140,11 @@ public class CustomerDashboardController extends ViewController implements Initi
         }
     }
 
+    /**
+     * This method initializes the customer dashboard populating the table view with the customers list.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customersTableView.setItems(DAO.CustomersDao.getCustomersList());

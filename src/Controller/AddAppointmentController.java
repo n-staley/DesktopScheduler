@@ -16,6 +16,10 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the add appointment form, and provides functionality.
+ * @author Nicholas Staley
+ */
 public class AddAppointmentController extends ViewController implements Initializable {
     public Label appointmentLabel;
     public Label appointmentIDLabel;
@@ -54,6 +58,12 @@ public class AddAppointmentController extends ViewController implements Initiali
     public DatePicker endDateInput;
     public Label appointmentEndDateLabel;
 
+    /**
+     * This method is used to save a new appointment to the database. Checks are done to make sure all fields
+     * are properly filled in. Also, checks for appointment overlap and business hours. If the appointment is
+     * successfully added, the user is returned to the appointment dashboard.
+     * @param actionEvent Save button clicked
+     */
     public void saveAppointment(ActionEvent actionEvent) {
         String errorMessage = "";
         boolean wasError = false;
@@ -107,6 +117,10 @@ public class AddAppointmentController extends ViewController implements Initiali
         if (startDateInput.getValue() == null) {
             wasError = true;
             errorMessage =  errorMessage.concat("Must select a start date from the date picker.\n");
+        }
+        if (endDateInput.getValue() == null) {
+            wasError = true;
+            errorMessage =  errorMessage.concat("Must select a end date from the date picker.\n");
         }
         if (startHourCombo.getSelectionModel().isEmpty()) {
             wasError = true;
@@ -214,7 +228,7 @@ public class AddAppointmentController extends ViewController implements Initiali
         if (appointmentAdded == 1) {
             DAO.AppointmentDao.populateAppointmentLists();
             try {
-                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -227,15 +241,25 @@ public class AddAppointmentController extends ViewController implements Initiali
         }
     }
 
+    /**
+     * This method cancels adding a new appointment returning the user to the appointment dashboard.
+     * @param actionEvent Cancel button clicked
+     */
     public void cancelAddAppointment(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method initializes the add appointment screen, populating the time combo boxes with hours and minutes lists,
+     * and populating the contact, customer, and user id combo boxes.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startHourCombo.setItems(DateTimeAdjustment.hoursCombo);
@@ -243,7 +267,7 @@ public class AddAppointmentController extends ViewController implements Initiali
         endHourCombo.setItems(DateTimeAdjustment.hoursCombo);
         endMinCombo.setItems(DateTimeAdjustment.minutesCombo);
         appointmentContactCombo.setItems(DAO.ContactsDao.getContactsNameList());
-        customerIDCombo.setItems(DAO.CustomersDao.getCustomerIDList());
+        customerIDCombo.setItems(DAO.CustomersDao.getCustomerNameList());
         userIDCombo.setItems(DAO.UserDao.getUsersNameList());
 
     }

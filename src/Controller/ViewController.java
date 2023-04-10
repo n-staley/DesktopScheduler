@@ -15,8 +15,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * This class provides some common controller methods to the other controller classes.
+ * @author Nichols Staley
+ */
 public abstract class ViewController {
 
+    /**
+     * This method switches scenes between the current one and the target scene.
+     * @param actionEvent The action event that triggered the scene switch
+     * @param path The path to the target scene
+     * @param width The preferred width for target scene
+     * @param height The preferred height for the target scene
+     * @param stageTitle The title for the target scene
+     * @throws IOException Can throw an IO exception if the file for the scene is not found.
+     */
     public void switchScene(ActionEvent actionEvent, String path, int width, int height, String stageTitle) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(path));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -26,6 +39,10 @@ public abstract class ViewController {
         stage.show();
     }
 
+    /**
+     * This method is used to exit the program, and to verify that the user want to exit before doing so.
+     * @param mainPane The pane from the scene
+     */
     public void exitProgram(Pane mainPane) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will exit the program, do you wish to continue?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -36,6 +53,14 @@ public abstract class ViewController {
         }
     }
 
+    /**
+     * This method checks a user input string for a maximum length, or the use of disallowed characters.
+     * @param maxLength The max length of the string
+     * @param textFieldCheck The text field to be checked
+     * @param inputField The user input the string is for
+     * @return Returns an InputErrorCheck object with a boolean for if there was an error, and an error message if there was
+     * an error.
+     */
     public InputErrorCheck stringErrorCheck(int maxLength, TextField textFieldCheck, String inputField) {
         InputErrorCheck inputErrorCheck = new InputErrorCheck();
 

@@ -76,7 +76,8 @@ public class UserDao {
     }
 
     /**
-     * This method sets the logged-in user.
+     * This method sets the logged-in user. Uses a lambda predicate to filter the stream of users for users that
+     * have the username supplied.
      * @param username username of user that logged in successfully
      */
     public static void setUser(String username) {
@@ -116,7 +117,8 @@ public class UserDao {
     }
 
     /**
-     * This method gets the id of the user whose username was provided.
+     * This method gets the id of the user whose username was provided. Uses a lambda expression for the predicate
+     * in the stream filter to make code concise and more readable.
      * @param userName The username used to get the id
      * @return Returns an integer of the user id number.
      */
@@ -129,7 +131,8 @@ public class UserDao {
     }
 
     /**
-     * This method gets the username of the user whose user id was provided.
+     * This method gets the username of the user whose user id was provided. Uses a lambda expression for the predicate
+     * in the stream filter to make code concise and more readable.
      * @param userID The user's id number
      * @return Returns a string of the user's username.
      */

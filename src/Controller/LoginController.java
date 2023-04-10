@@ -21,6 +21,10 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the login form, giving it its functionality.
+ * @author Nicholas Staley
+ */
 public class LoginController extends ViewController implements Initializable {
 
 
@@ -34,6 +38,13 @@ public class LoginController extends ViewController implements Initializable {
     public Button exitButton;
     public AnchorPane mainPane;
 
+    /**
+     * This method attempts to log in the user based off of the username and password entered. Also, checks to make sure
+     * a username and password were entered with no disallowed characters. Then, logs in every login attempt noting
+     * if the attempt was successful or not. Finally, if login was successful it sends user to the appointments' dashboard
+     * and checks if the user has any appointments in the next fifteen minutes.
+     * @param actionEvent Login button clicked
+     */
     public void login (ActionEvent actionEvent) {
         Locale errorLocale = Locale.getDefault();
         ResourceBundle errorRB = ResourceBundle.getBundle("LoginLanguage", errorLocale);
@@ -127,7 +138,7 @@ public class LoginController extends ViewController implements Initializable {
             ContactsDao.setContactsList();
 
             try {
-                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -153,6 +164,10 @@ public class LoginController extends ViewController implements Initializable {
         }
     }
 
+    /**
+     * This method is used to exit the program.
+     * @param actionEvent Exit button clicked
+     */
     public void exit(ActionEvent actionEvent) {
         Locale userLocale = Locale.getDefault();
         ResourceBundle rb = ResourceBundle.getBundle("LoginLanguage", userLocale);
@@ -168,6 +183,12 @@ public class LoginController extends ViewController implements Initializable {
 
         }
 
+    /**
+     * This method is used to initialize the login screen. It sets the zone id to the system default zone id of the user,
+     * and sets all text to either English or French based off of localization setting of the users' system.
+      * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Locale userLocale = Locale.getDefault();

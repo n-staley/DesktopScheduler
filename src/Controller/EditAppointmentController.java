@@ -15,6 +15,10 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the edit appointments scene, and provides functionality.
+ * @author Nicholas Staley
+ */
 public class EditAppointmentController extends ViewController implements Initializable {
     private static Appointment appointmentToEdit = null;
     public Label appointmentLabel;
@@ -54,6 +58,12 @@ public class EditAppointmentController extends ViewController implements Initial
     public ComboBox<String> customerIDCombo;
     public ComboBox<String> userIDCombo;
 
+    /**
+     * This method is used to save an edited appointment to the database. Checks are done to make sure all fields
+     * are properly filled in. Also, checks for appointment overlap and business hours. If the appointment is successfully
+     * updated, the user is returned to the appointment dashboard.
+     * @param actionEvent Save button clicked
+     */
     public void saveAppointment(ActionEvent actionEvent) {
         String errorMessage = "";
         boolean wasError = false;
@@ -106,6 +116,10 @@ public class EditAppointmentController extends ViewController implements Initial
         if (startDateInput.getValue() == null) {
             wasError = true;
             errorMessage =  errorMessage.concat("Must select a start date from the date picker.\n");
+        }
+        if (endDateInput.getValue() == null) {
+            wasError = true;
+            errorMessage =  errorMessage.concat("Must select a end date from the date picker.\n");
         }
         if (startHourCombo.getSelectionModel().isEmpty()) {
             wasError = true;
@@ -211,7 +225,7 @@ public class EditAppointmentController extends ViewController implements Initial
         if (appointmentUpdated > 0) {
             DAO.AppointmentDao.populateAppointmentLists();
             try {
-                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+                switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -239,19 +253,33 @@ public class EditAppointmentController extends ViewController implements Initial
         }
     }
 
+    /**
+     * This method cancels updating an appointment and returns the user to the appointment dashboard.
+     * @param actionEvent Cancel button clicked
+     */
     public void cancelEditAppointment(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment DashBoard");
+            switchScene(actionEvent, "/view/AppointmentDashboardForm.fxml", 1200, 600, "Appointment Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method sets the appointment that the user wants to edit.
+     * @param appointmentToEdit The appointment to be edited
+     */
     public static void setAppointmentToEdit(Appointment appointmentToEdit) {
         EditAppointmentController.appointmentToEdit = appointmentToEdit;
     }
 
+    /**
+     * This method initializes the edit appointment scene populating the text fields, date pickers, radio buttons , and combo boxes with
+     * the details of the appointment that is being edited.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentIDText.setText(String.valueOf(appointmentToEdit.getAppointmentID()));
@@ -281,7 +309,7 @@ public class EditAppointmentController extends ViewController implements Initial
         }
         appointmentContactCombo.setItems(DAO.ContactsDao.getContactsNameList());
         appointmentContactCombo.setValue(DAO.ContactsDao.getContactName(appointmentToEdit.getContactsID()));
-        customerIDCombo.setItems(DAO.CustomersDao.getCustomerIDList());
+        customerIDCombo.setItems(DAO.CustomersDao.getCustomerNameList());
         customerIDCombo.setValue(DAO.CustomersDao.getCustomerName(appointmentToEdit.getCustID()));
         userIDCombo.setItems(DAO.UserDao.getUsersNameList());
         userIDCombo.setValue(DAO.UserDao.getUserName(appointmentToEdit.getUsersID()));

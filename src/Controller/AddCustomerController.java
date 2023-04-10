@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.CustomersDao;
 import DAO.UserDao;
-import Model.User;
 import Utility.InputErrorCheck;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -14,6 +13,10 @@ import java.net.URL;
 import java.time.Instant;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the add customer form, and provides functionality.
+ * @author Nicholas Staley
+ */
 public class AddCustomerController extends ViewController implements Initializable {
     public Label customerLabel;
     public Label customerIDLabel;
@@ -34,6 +37,12 @@ public class AddCustomerController extends ViewController implements Initializab
     public Button cancelButton;
     public AnchorPane mainPane;
 
+    /**
+     * This method attempts to add the customer in the customer table in the database. All fields are checked
+     * to make sure they are filled in, no disallowed characters are used, and strings are the proper length.
+     * If the add is successful, the user is returned to the customer dashboard.
+     * @param actionEvent Save button clicked
+     */
     public void saveCustomer(ActionEvent actionEvent) {
         int wasAdded;
         InputErrorCheck errorCheck;
@@ -112,27 +121,40 @@ public class AddCustomerController extends ViewController implements Initializab
         if (wasAdded > 0) {
             CustomersDao.populateCustomersList();
             try {
-                switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+                switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers Dashboard");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
+    /**
+     * This method cancels adding a new customer, and returns the user to the customer dashboard.
+     * @param actionEvent Cancel button clicked
+     */
     public void cancelAddCustomer(ActionEvent actionEvent) {
         try {
-            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers DashBoard");
+            switchScene(actionEvent, "/view/CustomerDashboardForm.fxml", 1200, 600, "Customers Dashboard");
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * This method initializes the add customer form populating the countries combo box with a list of available countries.
+     * @param url The url
+     * @param resourceBundle The resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerCountryCombo.setItems(CustomersDao.getCountryNameList());
     }
 
+    /**
+     * This method changes the list of first level division options in the state/province combo box based on country selection.
+     * @param actionEvent Selection made in the country combo box
+     */
     public void countrySelected(ActionEvent actionEvent) {
         if (customerCountryCombo.getValue().equals("U.S")) {
             customerFirstDivisionCombo.setItems(CustomersDao.getDivisionUSAList());
