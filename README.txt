@@ -10,10 +10,10 @@ Email: nstale3@wgu.edu
 Version: 1.0
 Date: 04/10/23
 
-IDE: IntelliJ
-JDK:
-JavaFX:
-MySQL Connector Driver:
+IDE: IntelliJ Community 2021.1
+JDK: JDK-17.0.1
+JavaFX: JavaFX-SDK-17.0.1
+MySQL Connector Driver: mysql-connector-java-8.0.25
 
 Directions to run program:
     Launch program.
