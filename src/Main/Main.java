@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * This is the main class that is used to launch the appointment desktop application.
  *
  * @author Nicholas Staley
- * @version 1.0
+ * @version 1.1
  */
 
 public class Main extends Application {

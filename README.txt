@@ -7,8 +7,8 @@ to see various reports and lists of customers and appointments.
 
 Author: Nicholas Staley
 Email: nstale3@wgu.edu
-Version: 1.0
-Date: 04/10/23
+Version: 1.1
+Date: 04/12/23
 
 IDE: IntelliJ Community 2021.1
 JDK: JDK-17.0.1
