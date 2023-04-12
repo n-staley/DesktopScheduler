@@ -56,7 +56,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         DAO.DatabaseConnection.openConnection();
 
-        //Locale.setDefault(new Locale("fr"));
 
         launch(args);
 

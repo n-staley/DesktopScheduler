@@ -1,0 +1,10 @@
+Username: test, password: test, Date/Time: 2023-04-12T16:34:34.371794600-06:00[America/Denver], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-12T16:36:00.511108400-06:00[America/Denver], Successful login: true
+Username: admin, password: admin, Date/Time: 2023-04-12T16:36:31.409538300-06:00[America/Denver], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-12T16:37:27.482322200-06:00[America/Denver], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-12T16:40:11.259390100-06:00[America/Denver], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-12T16:41:28.066991400-06:00[America/Denver], Successful login: true
+Username: test, password: test, Date/Time: 2023-04-12T16:41:59.850338200-06:00[America/Denver], Successful login: true
+Username: admin, password: admin, Date/Time: 2023-04-12T16:44:44.352298400-06:00[America/Denver], Successful login: true
+Username: admin, password: admin, Date/Time: 2023-04-12T16:45:17.177718800-06:00[America/Denver], Successful login: true
+Username: admin, password: admin, Date/Time: 2023-04-12T16:45:44.507537100-06:00[America/Denver], Successful login: true

@@ -147,18 +147,20 @@ public class LoginController extends ViewController implements Initializable {
             if (appointmentsFifteenMin.size() > 0) {
                 String upcomingAppointments = "";
                 for (Appointment appointment : appointmentsFifteenMin) {
-                    upcomingAppointments = upcomingAppointments.concat(UserDao.getLoggedInUser().getUserName() + " has appointment number: " + appointment.getAppointmentID() + " at " + appointment.getFormattedStart() + ".\n");
+                    upcomingAppointments = upcomingAppointments.concat(UserDao.getLoggedInUser().getUserName() + errorRB.getString("fifteenPartOne") + appointment.getAppointmentID() + errorRB.getString("fifteenPartTwo") + appointment.getFormattedStart() + ".\n");
                 }
                 Alert upcomingAppointment = new Alert(Alert.AlertType.INFORMATION);
-                upcomingAppointment.setHeaderText("Appointments Next 15 Minutes");
+                upcomingAppointment.setTitle(errorRB.getString("fifteenTitle"));
+                upcomingAppointment.setHeaderText(errorRB.getString("fifteenHeader"));
                 upcomingAppointment.setContentText(upcomingAppointments);
                 upcomingAppointment.showAndWait();
 
             }
             else {
                 Alert upcomingAppointment = new Alert(Alert.AlertType.INFORMATION);
-                upcomingAppointment.setHeaderText("Appointments Next 15 Minutes");
-                upcomingAppointment.setContentText("You do not have any appointments in the next fifteen minutes.");
+                upcomingAppointment.setTitle(errorRB.getString("fifteenTitle"));
+                upcomingAppointment.setHeaderText(errorRB.getString("fifteenHeader"));
+                upcomingAppointment.setContentText(errorRB.getString("noFifteen"));
                 upcomingAppointment.showAndWait();
             }
         }
