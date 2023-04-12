@@ -223,6 +223,26 @@ public class AppointmentDao {
     }
 
     /**
+     * This method deletes appointments that have the same customer id number.
+     * @param customerID The id number of the customer
+     * @return Returns zero if nothing was deleted or greater than zero if there was a deletion.
+     */
+    public static int deleteAppointmentCustomerID(int customerID) {
+        String sql = "DELETE FROM client_schedule.appointments WHERE Customer_ID = ?";
+        int wasDeleted = 0;
+
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(sql)) {
+            ps.setInt(1, customerID);
+
+            wasDeleted = ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wasDeleted;
+    }
+
+    /**
      * This method gets the observable list of all appointments.
      * @return Returns an observable list of appointments of all the appointments.
      */

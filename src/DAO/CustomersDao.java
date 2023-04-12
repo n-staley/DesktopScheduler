@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.Appointment;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivisions;
@@ -169,7 +170,7 @@ public class CustomersDao {
      * @return Returns an integer of 0 if the customer was deleted, or greater than zero if the customer wasn't deleted.
      */
     public static int deleteCustomer(int customerID) {
-        String sql = "DELETE client_schedule.customers, client_schedule.appointments \n" +
+        /*String sql = "DELETE client_schedule.customers, client_schedule.appointments \n" +
                 "FROM client_schedule.customers \n" +
                 "INNER JOIN client_schedule.appointments ON client_schedule.customers.Customer_ID = client_schedule.appointments.Customer_ID\n" +
                 "WHERE client_schedule.customers.Customer_ID = ?";
@@ -182,17 +183,18 @@ public class CustomersDao {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
-        if (wasDeleted == 0) {
-            String noAppointments = "DELETE FROM client_schedule.customers WHERE Customer_ID = ?";
-            try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(noAppointments)) {
-                ps.setInt(1, customerID);
-                wasDeleted = ps.executeUpdate();
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
+        */
+        AppointmentDao.deleteAppointmentCustomerID(customerID);
+        int wasDeleted = 0;
+        String noAppointments = "DELETE FROM client_schedule.customers WHERE Customer_ID = ?";
+        try (PreparedStatement ps = DatabaseConnection.connection.prepareStatement(noAppointments)) {
+            ps.setInt(1, customerID);
+            wasDeleted = ps.executeUpdate();
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return wasDeleted;
     }
 
