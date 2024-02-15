@@ -1,5 +1,8 @@
 The Workplace Scheduler
 
+This was a school project to create a desktop workplace scheduling program using a java database connector with a
+mysql database.
+
 The Workplace Scheduler is a desktop application that provides users with a simple and efficient way to manage schedules.
 The user will be able to add new appointments, edit existing appointments, and delete appointments that are canceled.
 Also, they will be able to add new customers, edit existing customer, and delete customer. The user will also be able
